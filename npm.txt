@@ -3,7 +3,16 @@ npm create vite@latest
 npm install
 npm run dev
 
+...........................................................
 npm i react-router-dom
+npm i axios moment react-hot-toast react-icons recharts
+
+• axios → HTTP requests
+• moment → date/time formatting
+• react-hot-toast → clean toast notifications
+• react-icons → icon library
+• recharts → chart components for React
+
 ..........................................................
 npm install tailwindcss @tailwindcss/vite
 
