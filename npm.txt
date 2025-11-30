@@ -1,0 +1,21 @@
+npm create vite@latest
+
+npm install
+npm run dev
+..........................................................
+npm install tailwindcss @tailwindcss/vite
+
+import { defineConfig } from 'vite'
+import tailwindcss from '@tailwindcss/vite'
+
+export default defineConfig({
+  plugins: [
+    tailwindcss(),
+  ],
+})
+
+@import "tailwindcss";
+...........................................................
+npm init -y
+
+npm i nodemon mongoose express bcryptjs cookie-parser cors dotenv jsonwebtoken
