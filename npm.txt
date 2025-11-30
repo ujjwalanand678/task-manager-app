@@ -29,4 +29,54 @@ export default defineConfig({
 ...........................................................
 npm init -y
 
-npm i nodemon mongoose express bcryptjs cookie-parser cors dotenv jsonwebtoken
+For classic backend PDF generation, the cleanest install is:
+npm i pdfkit
+
+If you want to edit/merge existing PDFs:
+npm i pdf-lib
+
+If you want HTML → PDF export (perfect for invoices, dashboards, receipts):
+npm i puppeteer
+
+
+npm i nodemon mongoose express bcryptjs cookie-parser cors dotenv jsonwebtoken multer exceljs
+
+nodemon
+Your server’s babysitter. It watches your files and restarts the app whenever you save, so you’re not stuck 
+manually stopping and starting the server like an ancient monk ringing a bell every time.
+
+mongoose
+A translator between your JavaScript code and MongoDB. Mongo stores documents; your code speaks objects. Mongoose 
+handles the conversion, validation, and structure so your data doesn’t devolve into chaos.
+
+express
+The lightweight web server that gives your app structure. Routes, middleware, requests, responses—this is the
+ skeleton on which the rest of your API hangs.
+
+bcryptjs
+Password scrambler. It hashes passwords in a way that’s deliberately slow to crack, making it wildly frustrating 
+for anyone trying to brute-force your users’ secrets.
+
+cookie-parser
+The librarian of incoming cookies. Express doesn’t automatically know how to read cookies from a request, so this
+ little helper parses them into neat JavaScript objects.
+
+cors
+A gatekeeper. Browsers don’t like strangers, and CORS defines who’s allowed to speak to your server from another 
+domain. Think of it as the server's guest list.
+
+dotenv
+Secret-keeper. It loads variables from a .env file so your API keys, passwords, and other sensitive bits don’t
+ end up hardcoded in your repo like a forgotten treasure map.
+
+jsonwebtoken (JWT)
+Token minting machine. It creates and verifies signed tokens that let your server remember who a user is without 
+storing session data. Stateless identity with a dash of cryptographic flair.
+
+multer
+File-wrangler. It helps you process multipart/form-data, especially file uploads—images, PDFs, Excel sheets,
+ whatever the user tosses your way.
+
+exceljs
+Spreadsheet whisperer. It creates or reads Excel files in pure JavaScript. Generating reports, importing data, 
+exporting templates—this library handles the workbook gymnastics.
