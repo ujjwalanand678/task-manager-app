@@ -2,7 +2,11 @@ npm create vite@latest
 
 npm install
 npm run dev
-
+..........................................................
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "nodemon server.js"
+  },
 ...........................................................
 npm i react-router-dom
 npm i axios moment react-hot-toast react-icons recharts
