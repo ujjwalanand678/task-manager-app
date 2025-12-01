@@ -10,6 +10,7 @@ const route = express.Router();
 route.get("/dashboard-data", authorize, getDashboardData);
 //http://localhost:3000/api/tasks/user-dashboard-data
 route.get("/user-dashboard-data", authorize, getUserDashboardData);
+
 //http://localhost:3000/api/tasks/
 route.get("/", authorize, getTasks); 
 
