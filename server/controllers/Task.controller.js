@@ -147,7 +147,53 @@ export const getTaskById = async (req, res) => {
   }
 };
 
-export const updateTask = (req, res) => {};
+export const updateTask = async (req, res) => {
+    try {
+    const task = await Task.findById(req.params.id);
+
+    if (!task) {
+      return res.status(404).json({
+        success: false,
+        message: "Task not found",
+      });
+    }
+
+    // Update fields only if provided
+    task.title = req.body.title || task.title;
+    task.description = req.body.description || task.description;
+    task.priority = req.body.priority || task.priority;
+    task.dueDate = req.body.dueDate || task.dueDate;
+    task.todoChecklist = req.body.todoChecklist || task.todoChecklist;
+    task.attachments = req.body.attachments || task.attachments;
+
+    // Handle assignedTo safely
+    if (req.body.assignedTo) {
+      if (!Array.isArray(req.body.assignedTo)) {
+        return res.status(400).json({
+          success: false,
+          message: "assignedTo must be an array of user IDs",
+        });
+      }
+
+      task.assignedTo = req.body.assignedTo;
+    }
+
+    // Save updated task
+    const updatedTask = await task.save();
+
+    res.status(200).json({
+      success: true,
+      message: "Task updated successfully",
+      task: updatedTask,
+    });
+  } catch (error) {
+    res.status(500).json({
+      success: false,
+      message: "Server error",
+      error: error.message,
+    });
+  }
+};
 
 export const deleteTask = (req, res) => {};
 
