@@ -4,11 +4,9 @@ import jwt from "jsonwebtoken";
 
 // generate JWT token
 const createJwtToken = (user) => {
-  return jwt.sign(
-    { id: user._id, role: user.role, name: user.name },
-    process.env.JWT_TOKEN_KEY,
-    { expiresIn: "7d" }
-  );
+  return jwt.sign({ id: user.id }, process.env.JWT_TOKEN_KEY, {
+    expiresIn: "7d",
+  });
   // it will create a token with the user id and role and name as payload and sign it with the secret key and set the expiry time to 1 day.
   // we can store any other information in the payload as well.
 };
@@ -54,19 +52,17 @@ export const userRegister = async (req, res, next) => {
       role,
     });
     await user.save();
-    return res
-      .status(201)
-      .json({
-        success: true,
-        message: "User registered successfully",
-        data: {
-          id: user._id,
-          name: user.name,
-          email: user.email,
-          role: user.role,
-          profileImageUrl: user.profileImageUrl,
-        },
-      });
+    return res.status(201).json({
+      success: true,
+      message: "User registered successfully",
+      data: {
+        id: user._id,
+        name: user.name,
+        email: user.email,
+        role: user.role,
+        profileImageUrl: user.profileImageUrl,
+      },
+    });
   } catch (error) {
     return res.status(500).json({ success: false, message: "Server error" });
   }
@@ -92,17 +88,17 @@ export const userLogin = async (req, res, next) => {
         .json({ success: false, message: "Invalid password" });
     }
     const token = createJwtToken(user);
-    // we dont want to send password and role in response. so we are using destructuring to exclude them. {...rest} will contain all the other fields except password and role.
-    const { password: hashedPassword, role, ...rest } = user._doc;
-    return res
-      .status(200)
-      .json({
-        success: true,
-        message: "User logged in successfully",
-        token,
-        role,
-        data: rest,
-      });
+    // we dont want to send password and role in response.
+    // Convert mongoose document to plain object
+    const userObj = user.toObject();
+    delete userObj.password; // remove password
+    return res.status(200).json({
+      success: true,
+      message: "User logged in successfully",
+      token,
+      role: user.role,
+      data: userObj,
+    });
   } catch (error) {
     console.error("Login Error:", error);
     return res.status(500).json({ success: false, message: "Server error" });
@@ -146,13 +142,11 @@ export const updateUserProfile = async (req, res, next) => {
       { new: true }
     );
 
-    return res
-      .status(200)
-      .json({
-        success: true,
-        message: "User updated successfully",
-        data: updatedUser,
-      });
+    return res.status(200).json({
+      success: true,
+      message: "User updated successfully",
+      data: updatedUser,
+    });
   } catch (error) {
     return res
       .status(500)
