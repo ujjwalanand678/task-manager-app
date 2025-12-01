@@ -123,53 +123,33 @@ export const getUserProfile = async (req, res, next) => {
 };
 
 
-
-
-export const updateUserProfile = async (req, res, next) => {
-  const userId = req.params.id;
+export const updateUserProfile = async (req, res) => {
   try {
-    if (!mongoose.Types.ObjectId.isValid(userId)) {
-      return res
-        .status(400)
-        .json({ success: false, message: "Invalid user ID" });
-    }
-    const user = await User.findById(userId);
+    const user = await User.findById(req.user.id);
+
     if (!user) {
-      return res
-        .status(404)
-        .json({ success: false, message: " User not found" });
-    }
-    // Check if the user is trying to update their own profile
-    //user._id is comming from the database and userId is coming from the params.
-    // Ensure only the logged-in user can update their profile
-    if (req.user?.id !== userId) {
-      return res.status(403).json({
-        success: false,
-        message: "You are not authorized to update this profile",
-      });
-      // if (user._id.toString() !== userId) {
-      //   return res
-      //     .status(403)
-      //     .json({
-      //       success: false,
-      //       message: "You are not authorized to edit this blog",
-      //     });
+      return res.status(404).json({ message: "User not found" });
     }
 
-    const updatedUser = await User.findByIdAndUpdate(
-      userId,
-      { $set: req.body },
-      { new: true }
-    );
+    user.name = req.body.name || user.name;
+    user.email = req.body.email || user.email;
 
-    return res.status(200).json({
-      success: true,
-      message: "User updated successfully",
-      data: updatedUser,
+    if (req.body.password) {
+      const salt = await bcrypt.genSalt(10);
+      user.password = await bcrypt.hash(req.body.password, salt);
+    }
+
+    const updatedUser = await user.save();
+
+    res.json({
+      _id: updatedUser._id,
+      name: updatedUser.name,
+      email: updatedUser.email,
+      role: updatedUser.role,
+      token: createJwtToken(updatedUser),
     });
+
   } catch (error) {
-    return res
-      .status(500)
-      .json({ success: false, message: "Internal server update" });
+    res.status(500).json({ message: "Server error", error: error.message });
   }
 };
