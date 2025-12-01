@@ -54,10 +54,3 @@ export const getUserById = async (req, res) => {
   }
 };
 
-export const deleteUser = async (req, res )=>{
-    try {
-        
-    } catch (error) {
-        
-    }
-}
