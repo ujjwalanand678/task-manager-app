@@ -5,8 +5,12 @@ import { deleteUser, getUserById, getUsers } from "../controllers/User.controlle
 const route = express.Router();
 
 // User Management Routes
-route.get("/", authorize, adminOnly, getUsers);               
-route.get("/:id", authorize, getUserById);                 
+//http://localhost:3000/api/users
+route.get("/", authorize, adminOnly, getUsers); 
+
+//http://localhost:3000/api/users/:id
+route.get("/:id", authorize, getUserById);  
+
 route.delete("/:id", authorize, adminOnly, deleteUser);       
 
 export default route
