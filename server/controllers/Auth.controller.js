@@ -4,12 +4,14 @@ import jwt from "jsonwebtoken";
 
 // generate JWT token
 const createJwtToken = (user) => {
-  return jwt.sign({ id: user.id }, process.env.JWT_TOKEN_KEY, {
-    expiresIn: "7d",
-  });
-  // it will create a token with the user id and role and name as payload and sign it with the secret key and set the expiry time to 1 day.
-  // we can store any other information in the payload as well.
+  return jwt.sign(
+    { id: user._id, role: user.role, name: user.name },
+    process.env.JWT_TOKEN_KEY,
+    { expiresIn: "7d" }
+  );
 };
+
+
 
 export const userRegister = async (req, res, next) => {
   const { name, email, password, adminInviteToken, profileImageUrl } = req.body;
@@ -104,6 +106,24 @@ export const userLogin = async (req, res, next) => {
     return res.status(500).json({ success: false, message: "Server error" });
   }
 };
+
+
+export const getUserProfile = async (req, res, next) => {
+  try {
+    const user = await User.findById(req.user.id).select("-password");
+    
+    if (!user) {
+      return res.status(404).json({ message: "User not found" });
+    }
+
+    res.json(user);
+  } catch (error) {
+    res.status(500).json({ message: "Server error", error: error.message });
+  }
+};
+
+
+
 
 export const updateUserProfile = async (req, res, next) => {
   const userId = req.params.id;
