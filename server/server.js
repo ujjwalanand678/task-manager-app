@@ -6,7 +6,7 @@ import path from "path";
 import connectDB from "./config/db.js";
 import AuthRoutes from "./routes/Auth.routes.js"
 import UserRoutes from "./routes/User.routes.js"
-
+import TaskRoutes from "./routes/Task.routes.js"
 
 const app = express();
 dotenv.config();
@@ -32,7 +32,7 @@ app.use(express.json());
 //Routes
 app.use("/api/auth" , AuthRoutes )
 app.use("/api/users", UserRoutes)
-// app.use("/api/tasks")
+app.use("/api/tasks" , TaskRoutes)
 // app.use("/api/reports")
 
 connectDB().then(() => {
