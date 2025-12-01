@@ -19,7 +19,7 @@ route.get("/profile",authorize, getUserProfile)
 route.post("/profileupdated",authorize, updateUserProfile)
 
 //http://localhost:3000/api/auth/upload-image
-router.post("/upload-image",authorize, upload.single("image"),uploadProfileImage);
+route.post("/upload-image",authorize, upload.single("image"),uploadProfileImage);
 
 
 
