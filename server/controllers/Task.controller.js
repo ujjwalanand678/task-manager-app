@@ -121,7 +121,31 @@ export const getTasks = async (req, res) => {
   }
 };
 
-export const getTaskById = (req, res) => {};
+export const getTaskById = async (req, res) => {
+    try {
+    const task = await Task.findById(req.params.id).populate(
+      "assignedTo",
+      "name email profileImageUrl"
+    );
+
+    if (!task) {
+      return res
+        .status(404)
+        .json({ success: false, message: "Task not found" });
+    }
+
+    res.status(200).json({
+      success: true,
+      task,
+    });
+  } catch (error) {
+    res.status(500).json({
+      success: false,
+      message: "Server error",
+      error: error.message,
+    });
+  }
+};
 
 export const updateTask = (req, res) => {};
 
