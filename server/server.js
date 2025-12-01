@@ -28,10 +28,10 @@ app.use(cors(corsPolicy));
 app.use(express.json());
 
 //Routes
-app.use("api/auth" , AuthRoutes )
-// app.use("api/users")
-// app.use("api/tasks")
-// app.use("api/reports")
+app.use("/api/auth" , AuthRoutes )
+// app.use("/api/users")
+// app.use("/api/tasks")
+// app.use("/api/reports")
 
 connectDB().then(() => {
   app.listen(port, () => {
