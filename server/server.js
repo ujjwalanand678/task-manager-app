@@ -4,6 +4,7 @@ import mongoose from "mongoose";
 import cors from "cors";
 import path from "path";
 import connectDB from "./config/db.js";
+import AuthRoutes from "./routes/Auth.routes.js"
 
 const app = express();
 dotenv.config();
@@ -27,7 +28,7 @@ app.use(cors(corsPolicy));
 app.use(express.json());
 
 //Routes
-// app.use("api/auth")
+app.use("api/auth" , AuthRoutes )
 // app.use("api/users")
 // app.use("api/tasks")
 // app.use("api/reports")

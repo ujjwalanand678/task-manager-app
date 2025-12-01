@@ -1,0 +1,111 @@
+import User from "../models/User.model.js";
+import bcrypt from "bcryptjs";
+import jwt from "jsonwebtoken";
+
+// generate JWT token
+const createJwtToken = (user)=>{
+return jwt.sign({id : user._id , role: user.role, name: user.name}, process.env.JWT_TOKEN_KEY,{expiresIn: "7d"}) 
+// it will create a token with the user id and role and name as payload and sign it with the secret key and set the expiry time to 1 day.
+// we can store any other information in the payload as well.
+}
+
+export const userRegister = async (req, res, next) => {
+  const { name, email, password, role } = req.body;
+  try {
+    let user = await User.findOne({ email: email });
+    if (user) {
+      return res
+        .status(400)
+        .json({
+          success: false,
+          message:
+            "user is already registered with this email, please use a different email",
+        });
+    }
+    //password encryption
+    const salt = await bcrypt.genSalt(10)
+    const hashing = await bcrypt.hash(password , salt)
+
+    user= new User({name, email, password : hashing, role})
+    await user.save()
+     return res
+      .status(200)
+      .json({ success: true, message: "User registered successfully" });
+  } catch (error) {
+      return res.status(500).json({ success: false, message: "Server error" });
+  }
+};
+
+export const userLogin = async (req, res, next) => {
+    //data aquired from the frontend/client/postman
+ const {email,password}= req.body;
+ try {
+    //find the registered email
+    const user = await User.findOne({email :email})
+    if(!user){
+        return res.status(400).json({success:false , message: "User is not registered"})
+    }
+
+    //compare password
+    const comparePassword = await bcrypt.compare(password, user.password) 
+    if(!comparePassword){
+        return res.status(400).json({ success: false, message: "Invalid password" });
+    }
+const token = createJwtToken(user)
+     // we dont want to send password and role in response. so we are using destructuring to exclude them. {...rest} will contain all the other fields except password and role.
+     const { password: hashedPassword, role, ...rest}= user._doc; 
+    return res
+      .status(200)
+      .json({ success: true, message: "User logged in successfully" , token , role, data: rest});
+ } catch (error) {
+    console.error("Login Error:", error);
+    return res.status(500).json({ success: false, message: "Server error" });
+ }
+};
+
+export const updateUser = async (req, res, next) => {
+  const userId = req.params.id;
+  try {
+    if (!mongoose.Types.ObjectId.isValid(userId)) {
+      return res
+        .status(400)
+        .json({ success: false, message: "Invalid user ID" });
+    }
+    const user = await User.findById(userId);
+    if (!user) {
+      return res
+        .status(404)
+        .json({ success: false, message: " User not found" });
+    }
+    // Check if the user is trying to update their own profile
+    //user._id is comming from the database and userId is coming from the params.
+      // Ensure only the logged-in user can update their profile
+       if (req.user?.id !== userId) {
+      return res.status(403).json({
+        success: false,
+        message: "You are not authorized to update this profile",
+      });
+    // if (user._id.toString() !== userId) {
+    //   return res
+    //     .status(403)
+    //     .json({
+    //       success: false,
+    //       message: "You are not authorized to edit this blog",
+    //     });
+    }
+
+    const updatedUser = await User.findByIdAndUpdate(
+      userId,
+      { $set: req.body },
+      { new: true }
+    );
+    
+    return res
+      .status(200)
+      .json({ success: true, message: "User updated successfully" , data: updatedUser,});
+  } catch (error) {
+    return res
+      .status(500)
+      .json({ success: false, message: "Internal server update" });
+  }
+};
