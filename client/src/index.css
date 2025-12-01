@@ -4,7 +4,6 @@
 :root {
   --font-display: "Poppins", "sans-serif";
   --breakpoint-3xl: 1920px;
-  --color-primary: #1368EC;
 }
 
 @layer base {
@@ -13,7 +12,35 @@
   }
 
   body {
-    background-color: #fcbfbc;
     overflow-x: hidden;
   }
 }
+@keyframes floatSlow {
+  0% { transform: translateY(0px) }
+  50% { transform: translateY(-20px) }
+  100% { transform: translateY(0px) }
+}
+@keyframes floatMed {
+  0% { transform: translateY(0px) }
+  50% { transform: translateY(-30px) }
+  100% { transform: translateY(0px) }
+}
+@keyframes floatFast {
+  0% { transform: translateY(0px) }
+  50% { transform: translateY(-40px) }
+  100% { transform: translateY(0px) }
+}
+
+.animate-float-slow { animation: floatSlow 10s ease-in-out infinite; }
+.animate-float-med { animation: floatMed 8s ease-in-out infinite; }
+.animate-float-fast { animation: floatFast 6s ease-in-out infinite; }
+
+@keyframes wiggle {
+  0% { transform: rotate(0deg) translateY(0px); }
+  50% { transform: rotate(8deg) translateY(-10px); }
+  100% { transform: rotate(0deg) translateY(0px); }
+}
+
+.animate-wiggle-slow { animation: wiggle 12s ease-in-out infinite; }
+.animate-wiggle-med { animation: wiggle 9s ease-in-out infinite; }
+.animate-wiggle-fast { animation: wiggle 6s ease-in-out infinite; }
