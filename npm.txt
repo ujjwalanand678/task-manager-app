@@ -45,6 +45,7 @@ npm i pdf-lib
 If you want HTML → PDF export (perfect for invoices, dashboards, receipts):
 npm i puppeteer
 
+npm install cloudinary multer dotenv
 
 npm i nodemon mongoose express bcryptjs cookie-parser cors dotenv jsonwebtoken multer exceljs
 

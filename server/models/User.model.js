@@ -5,10 +5,14 @@ const UserSchema = new mongoose.Schema(
     name: { type: String, required: true },
     email: { type: String, required: true, unique: true },
     password: { type: String, required: true },
+    
+    // Cloudinary fields
     profileImageUrl: { type: String, default: null },
-    role: { type: String, enum: ["admin", "member"], default: "member" }, // Role-based access
+    profileImagePublicId: { type: String, default: null },
+
+    role: { type: String, enum: ["admin", "member"], default: "member" },
   },
   { timestamps: true }
 );
 
-export default mongoose.model("User" , UserSchema)
+export default mongoose.model("User", UserSchema);
