@@ -2,9 +2,7 @@ import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import AuthLayouts from "../../components/layouts/AuthLayouts";
 import Input from "../../components/input/Input";
-
-const validateEmail = (email) =>
-  /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
+import { validateEmail } from "../../utils/helper";
 
 const Login = () => {
   const [email, setEmail] = useState("");
@@ -17,10 +15,12 @@ const Login = () => {
 
     const newErrors = {};
 
+    // Email validation
     if (!validateEmail(email)) {
       newErrors.email = "Enter a valid email address";
     }
 
+    // Password validation
     if (!password) {
       newErrors.password = "Password is required";
     }
@@ -43,19 +43,7 @@ const Login = () => {
             placeholder="you@example.com"
             value={email}
             onChange={(e) => setEmail(e.target.value)}
-            className={`
-              rounded-lg px-4 py-3
-              bg-slate-200 text-slate-700
-              placeholder:text-slate-400
-
-              border-none outline-none ring-0
-              focus:border-none focus:outline-none focus:ring-0
-
-              shadow-[inset_4px_4px_8px_#b8bcc2,inset_-4px_-4px_8px_#ffffff]
-              focus:shadow-[inset_2px_2px_4px_#b8bcc2,inset_-2px_-2px_4px_#ffffff]
-
-              ${errors.email ? "shadow-[inset_2px_2px_4px_#fca5a5,inset_-2px_-2px_4px_#ffffff]" : ""}
-            `}
+            error={!!errors.email}
           />
 
           {errors.email && (
@@ -73,19 +61,7 @@ const Login = () => {
             placeholder="••••••••"
             value={password}
             onChange={(e) => setPassword(e.target.value)}
-            className={`
-              rounded-lg px-4 py-3
-              bg-slate-200 text-slate-700
-              placeholder:text-slate-400
-
-              border-none outline-none ring-0
-              focus:border-none focus:outline-none focus:ring-0
-
-              shadow-[inset_4px_4px_8px_#b8bcc2,inset_-4px_-4px_8px_#ffffff]
-              focus:shadow-[inset_2px_2px_4px_#b8bcc2,inset_-2px_-2px_4px_#ffffff]
-
-              ${errors.password ? "shadow-[inset_2px_2px_4px_#fca5a5,inset_-2px_-2px_4px_#ffffff]" : ""}
-            `}
+            error={!!errors.password}
           />
 
           {errors.password && (
