@@ -11,7 +11,7 @@ import ReportRoutes from "./routes/Report.routes.js"
 
 const app = express();
 dotenv.config();
-const port = process.env.PORT || 3000;
+const port = process.env.PORT || 8000;
 mongoose.set("strictQuery", false);
 
 //middleware to handle cors policy
