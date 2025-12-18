@@ -1,20 +1,25 @@
 import React, { useState } from "react";
 import { FaRegEye, FaRegEyeSlash } from "react-icons/fa6";
 
-const Input = ({ value, onChange, label, placeholder, type }) => {
+const Input = ({
+  value,
+  onChange,
+  label,
+  placeholder,
+  type = "text",
+  className = "",
+}) => {
   const [showPassword, setShowPassword] = useState(false);
 
-  const toggleShowPassword = () => {
-    setShowPassword(!showPassword);
-  };
-
   return (
-    <div className="mb-4 w-full">
-      {/* Label */}
-      <label className="text-[13px] text-slate-800">{label}</label>
+    <div className="w-full">
+      {label && (
+        <label className="text-sm font-medium text-slate-600">
+          {label}
+        </label>
+      )}
 
-      {/* Input Box */}
-      <div className="input-box relative mt-1">
+      <div className="relative mt-1">
         <input
           type={
             type === "password"
@@ -24,26 +29,26 @@ const Input = ({ value, onChange, label, placeholder, type }) => {
               : type
           }
           placeholder={placeholder}
-          className="w-full bg-transparent outline-none border-b border-slate-400 py-2 pr-10"
           value={value}
-          onChange={(e) => onChange(e)}
+          onChange={onChange}
+          className={`
+            w-full
+            border-none outline-none ring-0
+            focus:border-none focus:outline-none focus:ring-0
+            transition-all duration-150
+            ${className}
+          `}
         />
 
-        {/* Password Toggle Icon */}
         {type === "password" && (
-          <div className="absolute right-2 top-2 cursor-pointer">
+          <div
+            className="absolute right-3 top-1/2 -translate-y-1/2 cursor-pointer"
+            onClick={() => setShowPassword(!showPassword)}
+          >
             {showPassword ? (
-              <FaRegEye
-                size={22}
-                className="text-primary"
-                onClick={toggleShowPassword}
-              />
+              <FaRegEye size={20} className="text-slate-600" />
             ) : (
-              <FaRegEyeSlash
-                size={22}
-                className="text-slate-400"
-                onClick={toggleShowPassword}
-              />
+              <FaRegEyeSlash size={20} className="text-slate-400" />
             )}
           </div>
         )}

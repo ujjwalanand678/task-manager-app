@@ -9,6 +9,7 @@ import MyTasks from "./pages/User/MyTasks";
 import ViewTaskDetails from "./pages/User/ViewTaskDetails";
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 import PrivateRoute from "./routes/PrivateRoute";
+
 const App = () => {
   return (
     <div>
