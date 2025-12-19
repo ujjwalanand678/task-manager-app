@@ -1,17 +1,18 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import AuthLayouts from "../../components/layouts/AuthLayouts.jsx";
 import Input from "../../components/input/Input.jsx";
 import { validateEmail } from "../../utils/helper.js";
 import axiosInstance from "../../utils/axiosInstance.js";
 import { API_PATHS } from "../../utils/apiPath.js";
+import { UserContext } from "../../context/UserContext.jsx";
 
 const Login = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-
   const [errors, setErrors] = useState({});
   const [apiError, setApiError] = useState("");
+const {updateUser} = useContext(UserContext)
 
   const navigate = useNavigate();
 
@@ -31,7 +32,7 @@ const Login = () => {
     setErrors(newErrors);
     setApiError("");
 
-    // ⛔ Stop here if validation fails
+    // Stop here if validation fails
     if (Object.keys(newErrors).length > 0) return;
 
     try {
@@ -44,6 +45,7 @@ const Login = () => {
 
       if (token) {
         localStorage.setItem("token", token);
+        updateUser(response.data)
 
         if (role?.toLowerCase() === "admin") {
           navigate("/admin/dashboard");
