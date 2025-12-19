@@ -1,10 +1,15 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 
-import AuthLayouts from "../../components/layouts/AuthLayouts";
-import Input from "../../components/input/Input";
-import ProfilePhotoSelector from "../../components/input/ProfilePhotoSelector";
-import { validateEmail } from "../../utils/helper";
+import AuthLayouts from "../../components/layouts/AuthLayouts.jsx";
+import Input from "../../components/input/Input.jsx";
+import ProfilePhotoSelector from "../../components/input/ProfilePhotoSelector.jsx";
+
+import { validateEmail } from "../../utils/helper.js";
+import axiosInstance from "../../utils/axiosInstance.js";
+import { API_PATHS } from "../../utils/apiPath.js";
+import uploadImage from "../../utils/uploadImage.js";
+import { UserContext } from "../../context/UserContext.jsx";
 
 const SignUp = () => {
   const [profilePic, setProfilePic] = useState(null);
@@ -14,14 +19,20 @@ const SignUp = () => {
   const [adminInviteToken, setAdminInviteToken] = useState("");
 
   const [errors, setErrors] = useState({});
+  const [apiError, setApiError] = useState("");
+
+  const { updateUser } = useContext(UserContext);
   const navigate = useNavigate();
 
-  const handleSignUp = (e) => {
+  const handleSignUp = async (e) => {
     e.preventDefault();
+
+    let profileImageUrl = "";
+    let profileImagePublicId = "";
 
     const newErrors = {};
 
-    if (!fullName) {
+    if (!fullName.trim()) {
       newErrors.fullName = "Full name is required";
     }
 
@@ -34,10 +45,49 @@ const SignUp = () => {
     }
 
     setErrors(newErrors);
+    setApiError("");
 
-    if (Object.keys(newErrors).length === 0) {
-      // 👉 API call here
-      navigate("/login");
+    if (Object.keys(newErrors).length > 0) return;
+
+    try {
+      // 1️⃣ Upload image first (if selected)
+      if (profilePic) {
+        const imgUploadRes = await uploadImage(profilePic);
+        profileImageUrl = imgUploadRes.imageUrl || "";
+        profileImagePublicId = imgUploadRes.publicId || "";
+      }
+
+      // 2️⃣ Register user
+      const response = await axiosInstance.post(
+        API_PATHS.AUTH.REGISTER,
+        {
+          name: fullName,
+          email,
+          password,
+          adminInviteToken,
+          profileImageUrl,
+          profileImagePublicId,
+        }
+      );
+
+      const { token, role, data } = response.data;
+
+      if (token) {
+        localStorage.setItem("token", token);
+        updateUser(data);
+
+        navigate(
+          role === "admin"
+            ? "/admin/dashboard"
+            : "/user/dashboard"
+        );
+      }
+    } catch (error) {
+      setApiError(
+        error.response?.data?.message ||
+          error.response?.data?.error ||
+          "Something went wrong. Please try again."
+      );
     }
   };
 
@@ -52,10 +102,22 @@ const SignUp = () => {
           Join us today by entering your details below.
         </p>
 
-        <form onSubmit={handleSignUp} className="space-y-6 px-2 md:px-0">
+        <form
+          onSubmit={handleSignUp}
+          className="space-y-6 px-2 md:px-0"
+        >
+          {apiError && (
+            <p className="text-center text-sm text-rose-500">
+              {apiError}
+            </p>
+          )}
+
           {/* Profile Photo */}
           <div className="flex justify-center">
-            <ProfilePhotoSelector image={profilePic} setImage={setProfilePic} />
+            <ProfilePhotoSelector
+              image={profilePic}
+              setImage={setProfilePic}
+            />
           </div>
 
           {/* Inputs */}
@@ -69,7 +131,9 @@ const SignUp = () => {
                 error={!!errors.fullName}
               />
               {errors.fullName && (
-                <p className="mt-1 text-xs text-rose-500">{errors.fullName}</p>
+                <p className="mt-1 text-xs text-rose-500">
+                  {errors.fullName}
+                </p>
               )}
             </div>
 
@@ -82,7 +146,9 @@ const SignUp = () => {
                 error={!!errors.email}
               />
               {errors.email && (
-                <p className="mt-1 text-xs text-rose-500">{errors.email}</p>
+                <p className="mt-1 text-xs text-rose-500">
+                  {errors.email}
+                </p>
               )}
             </div>
 
@@ -96,7 +162,9 @@ const SignUp = () => {
                 error={!!errors.password}
               />
               {errors.password && (
-                <p className="mt-1 text-xs text-rose-500">{errors.password}</p>
+                <p className="mt-1 text-xs text-rose-500">
+                  {errors.password}
+                </p>
               )}
             </div>
 
@@ -104,7 +172,9 @@ const SignUp = () => {
               label="Admin Invite Token"
               placeholder="6 Digit Code (optional)"
               value={adminInviteToken}
-              onChange={(e) => setAdminInviteToken(e.target.value)}
+              onChange={(e) =>
+                setAdminInviteToken(e.target.value)
+              }
             />
           </div>
 
@@ -114,15 +184,10 @@ const SignUp = () => {
             className="
               w-full py-3 rounded-lg
               bg-slate-200 text-slate-700 font-medium
-
-              border-none outline-none ring-0
-              focus:outline-none focus:ring-0
-
               shadow-[8px_8px_16px_#b8bcc2,-8px_-8px_16px_#ffffff]
               hover:shadow-[12px_12px_24px_#b8bcc2,-12px_-12px_24px_#ffffff]
               active:shadow-[inset_4px_4px_8px_#b8bcc2,inset_-4px_-4px_8px_#ffffff]
               active:scale-[0.98]
-
               transition-all duration-150
             "
           >

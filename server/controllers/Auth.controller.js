@@ -16,88 +16,56 @@ const createJwtToken = (user) => {
 //REGISTER USER
 
 export const userRegister = async (req, res) => {
-  const { name, email, password, adminInviteToken } = req.body;
+  const {
+    name,
+    email,
+    password,
+    adminInviteToken,
+    profileImageUrl,
+    profileImagePublicId,
+  } = req.body;
 
   try {
     if (!name || !email || !password) {
-      return res.status(400).json({
-        success: false,
-        message: "Name, email, and password are required",
-      });
+      return res.status(400).json({ message: "Missing required fields" });
     }
 
-    // check email
-    let userExists = await User.findOne({ email });
+    const userExists = await User.findOne({ email });
     if (userExists) {
-      return res.status(400).json({
-        success: false,
-        message: "User already registered with this email",
-      });
+      return res.status(400).json({ message: "User already exists" });
     }
 
-    // Determine admin role
-    let role = "member";
-    if (
-      adminInviteToken &&
-      adminInviteToken === process.env.ADMIN_INVITE_TOKEN
-    ) {
-      role = "admin";
-    }
-
-    // Encrypt password
     const salt = await bcrypt.genSalt(10);
     const hashedPassword = await bcrypt.hash(password, salt);
 
-    // CLOUDINARY UPLOAD (if profile image exists)
-    let profileImageUrl = null;
-    let profileImagePublicId = null;
-
-    if (req.file) {
-      const uploadResult = await new Promise((resolve, reject) => {
-        const uploadStream = cloudinary.uploader.upload_stream(
-          {
-            folder: "user-profiles",
-            resource_type: "image",
-            transformation: [{ width: 800, height: 800, crop: "limit" }],
-          },
-          (error, result) => (error ? reject(error) : resolve(result))
-        );
-
-        streamifier.createReadStream(req.file.buffer).pipe(uploadStream);
-      });
-
-      profileImageUrl = uploadResult.secure_url;
-      profileImagePublicId = uploadResult.public_id;
+    let role = "member";
+    if (adminInviteToken === process.env.ADMIN_INVITE_TOKEN) {
+      role = "admin";
     }
 
-    // Create user
     const user = new User({
       name,
       email,
       password: hashedPassword,
       role,
-      profileImageUrl,
-      profileImagePublicId,
+      profileImageUrl: profileImageUrl || null,
+      profileImagePublicId: profileImagePublicId || null,
     });
 
     await user.save();
 
-    return res.status(201).json({
+    res.status(201).json({
       success: true,
       message: "User registered successfully",
-      data: {
-        id: user._id,
-        name: user.name,
-        email: user.email,
-        role: user.role,
-        profileImageUrl: user.profileImageUrl,
-      },
+      token: createJwtToken(user),
+      role: user.role,
+      data: user,
     });
   } catch (error) {
-    console.error("Register Error:", error);
-    return res.status(500).json({ success: false, message: "Server error" });
+    res.status(500).json({ message: "Server error" });
   }
 };
+
 
 //LOGIN USER
 

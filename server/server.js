@@ -8,11 +8,19 @@ import AuthRoutes from "./routes/Auth.routes.js"
 import UserRoutes from "./routes/User.routes.js"
 import TaskRoutes from "./routes/Task.routes.js"
 import ReportRoutes from "./routes/Report.routes.js"
+import { fileURLToPath } from "url";
+import { dirname } from "path";
+
 
 const app = express();
 dotenv.config();
 const port = process.env.PORT || 8000;
+
 mongoose.set("strictQuery", false);
+
+// ES module __dirname fix
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = dirname(__filename);
 
 //middleware to handle cors policy
 const corsPolicy = {
@@ -36,6 +44,9 @@ app.use("/api/auth" , AuthRoutes )
 app.use("/api/users", UserRoutes)
 app.use("/api/tasks" , TaskRoutes)
 app.use("/api/reports", ReportRoutes)
+// Serve uploads folder
+app.use("/uploads", express.static(path.join(__dirname, "uploads")));
+
 
 connectDB().then(() => {
   app.listen(port, () => {
