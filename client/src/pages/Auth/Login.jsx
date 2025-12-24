@@ -7,12 +7,64 @@ import axiosInstance from "../../utils/axiosInstance.js";
 import { API_PATHS } from "../../utils/apiPath.js";
 import { UserContext } from "../../context/UserContext.jsx";
 
+const styles = {
+  form: `
+    space-y-6
+  `,
+
+  apiError: `
+    text-center
+    text-xs
+    text-rose-500
+  `,
+
+  fieldError: `
+    mt-1
+    text-xs
+    text-rose-500
+  `,
+submitBtn: `
+  w-full py-3.5 rounded-2xl
+  text-[#003465] text-lg font-semibold tracking-wide
+  
+  /* High-Gloss Glass Gradient */
+  bg-gradient-to-br from-white/80 via-white/40 to-white/20
+  
+  /* Frosting & Border */
+  backdrop-blur-xl
+  border border-white/60
+  
+  /* Shadow for Depth */
+  shadow-[0_4px_20px_rgba(0,0,0,0.05)]
+
+  /* Interactions */
+  transition-all duration-300 ease-out
+  hover:bg-white/60
+  hover:scale-[1.02] 
+  hover:shadow-[0_8px_25px_rgba(0,0,0,0.1)]
+  active:scale-[0.98]
+`,
+
+  footer: `
+    text-center
+    text-sm
+    text-slate-700
+  `,
+
+  footerLink: `
+    ml-1
+    font-medium
+    text-[#0085FF]
+    hover:underline
+  `,
+};
+
 const Login = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [errors, setErrors] = useState({});
   const [apiError, setApiError] = useState("");
-const {updateUser} = useContext(UserContext)
+  const { updateUser } = useContext(UserContext);
 
   const navigate = useNavigate();
 
@@ -20,11 +72,9 @@ const {updateUser} = useContext(UserContext)
     e.preventDefault();
 
     const newErrors = {};
-
     if (!validateEmail(email)) {
       newErrors.email = "Enter a valid email address";
     }
-
     if (!password) {
       newErrors.password = "Password is required";
     }
@@ -32,7 +82,6 @@ const {updateUser} = useContext(UserContext)
     setErrors(newErrors);
     setApiError("");
 
-    // Stop here if validation fails
     if (Object.keys(newErrors).length > 0) return;
 
     try {
@@ -45,36 +94,28 @@ const {updateUser} = useContext(UserContext)
 
       if (token) {
         localStorage.setItem("token", token);
-        updateUser(response.data)
+        updateUser(response.data);
 
-        if (role?.toLowerCase() === "admin") {
-          navigate("/admin/dashboard");
-        } else {
-          navigate("/user/dashboard");
-        }
+        navigate(
+          role?.toLowerCase() === "admin"
+            ? "/admin/dashboard"
+            : "/user/dashboard"
+        );
       }
     } catch (err) {
-      const message =
+      setApiError(
         err.response?.data?.message ||
-        err.response?.data?.error ||
-        "Something went wrong. Please try again.";
-
-      setApiError(message);
+          err.response?.data?.error ||
+          "Something went wrong. Please try again."
+      );
     }
   };
 
   return (
     <AuthLayouts title="Welcome back" subtitle="Sign in to continue">
-      <form onSubmit={handleLogin} className="space-y-6">
+      <form onSubmit={handleLogin} className={styles.form}>
+        {apiError && <p className={styles.apiError}>{apiError}</p>}
 
-        {/* API Error */}
-        {apiError && (
-          <p className="text-center text-sm text-rose-500">
-            {apiError}
-          </p>
-        )}
-
-        {/* Email */}
         <div>
           <Input
             label="Email address"
@@ -85,13 +126,10 @@ const {updateUser} = useContext(UserContext)
             error={!!errors.email}
           />
           {errors.email && (
-            <p className="mt-1 text-xs text-rose-500">
-              {errors.email}
-            </p>
+            <p className={styles.fieldError}>{errors.email}</p>
           )}
         </div>
 
-        {/* Password */}
         <div>
           <Input
             label="Password"
@@ -102,37 +140,17 @@ const {updateUser} = useContext(UserContext)
             error={!!errors.password}
           />
           {errors.password && (
-            <p className="mt-1 text-xs text-rose-500">
-              {errors.password}
-            </p>
+            <p className={styles.fieldError}>{errors.password}</p>
           )}
         </div>
 
-        {/* Submit */}
-        <button
-          type="submit"
-          className="
-            w-full py-3 rounded-lg
-            bg-slate-200 text-slate-700 font-medium
-            border-none outline-none ring-0
-            focus:outline-none focus:ring-0
-            shadow-[8px_8px_16px_#b8bcc2,-8px_-8px_16px_#ffffff]
-            hover:shadow-[12px_12px_24px_#b8bcc2,-12px_-12px_24px_#ffffff]
-            active:shadow-[inset_4px_4px_8px_#b8bcc2,inset_-4px_-4px_8px_#ffffff]
-            active:scale-[0.98]
-            transition-all duration-150
-          "
-        >
+        <button type="submit" className={styles.submitBtn}>
           Sign in
         </button>
 
-        {/* Footer */}
-        <p className="text-center text-sm text-slate-600">
+        <p className={styles.footer}>
           Don’t have an account?
-          <Link
-            to="/signup"
-            className="ml-1 font-medium text-slate-700 hover:underline"
-          >
+          <Link to="/signup" className={styles.footerLink}>
             Sign up
           </Link>
         </p>

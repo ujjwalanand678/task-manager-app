@@ -1,6 +1,56 @@
 import React, { useRef, useState } from "react";
 import { LuUser, LuUpload, LuTrash } from "react-icons/lu";
 
+const styles = {
+  wrapper: `
+    flex flex-col items-center gap-3 mb-6
+  `,
+
+  /* Polished Glass Avatar Circle */
+  avatar: `
+    relative w-28 h-28 rounded-full
+    bg-white/20
+    backdrop-blur-2xl
+    border-2 border-white/40
+    shadow-[0_10px_30px_rgba(0,0,0,0.1),inset_0_2px_4px_rgba(255,255,255,0.3)]
+    flex items-center justify-center
+    transition-all duration-300
+    hover:border-white/60
+  `,
+
+  avatarIcon: `
+    text-4xl text-[#003465]/40
+  `,
+
+  image: `
+    w-[calc(100%-8px)] h-[calc(100%-8px)] rounded-full object-cover 
+    border border-white/20
+  `,
+
+  /* Floating Action Button */
+  actionBtn: `
+    absolute bottom-0 right-0
+    w-10 h-10 rounded-full
+    bg-white/90
+    backdrop-blur-md
+    border border-white
+    flex items-center justify-center
+    text-[#003465]
+    shadow-lg
+    hover:bg-white
+    hover:scale-110
+    active:scale-90
+    transition-all duration-200
+  `,
+
+  removeIcon: `
+    text-rose-500
+  `,
+
+  hint: `
+    text-[12px] font-bold text-[#003465]/60 uppercase tracking-widest
+  `,
+};
 const ProfilePhotoSelector = ({ image, setImage }) => {
   const inputRef = useRef(null);
   const [previewUrl, setPreviewUrl] = useState(null);
@@ -23,7 +73,7 @@ const ProfilePhotoSelector = ({ image, setImage }) => {
   };
 
   return (
-    <div className="flex flex-col items-center gap-2">
+    <div className={styles.wrapper}>
       <input
         type="file"
         accept="image/*"
@@ -32,23 +82,15 @@ const ProfilePhotoSelector = ({ image, setImage }) => {
         className="hidden"
       />
 
-      {/* Avatar */}
-      <div
-        className="
-          relative w-24 h-24 rounded-full
-          bg-slate-200
-          flex items-center justify-center
-
-          shadow-[inset_6px_6px_12px_#b8bcc2,inset_-6px_-6px_12px_#ffffff]
-        "
-      >
+      {/* Glass Avatar */}
+      <div className={styles.avatar}>
         {!image ? (
-          <LuUser className="text-4xl text-slate-500" />
+          <LuUser className={styles.avatarIcon} />
         ) : (
           <img
             src={previewUrl}
             alt="Profile"
-            className="w-20 h-20 rounded-full object-cover"
+            className={styles.image}
           />
         )}
 
@@ -56,23 +98,10 @@ const ProfilePhotoSelector = ({ image, setImage }) => {
         <button
           type="button"
           onClick={image ? handleRemoveImage : onChooseFile}
-          className="
-            absolute -bottom-2 -right-2
-            w-9 h-9 rounded-full
-            bg-slate-200
-
-            flex items-center justify-center
-            text-slate-600
-
-            shadow-[4px_4px_8px_#b8bcc2,-4px_-4px_8px_#ffffff]
-            hover:shadow-[6px_6px_12px_#b8bcc2,-6px_-6px_12px_#ffffff]
-            active:shadow-[inset_3px_3px_6px_#b8bcc2,inset_-3px_-3px_6px_#ffffff]
-
-            transition-all duration-150
-          "
+          className={styles.actionBtn}
         >
           {image ? (
-            <LuTrash className="text-rose-500" size={18} />
+            <LuTrash className={styles.removeIcon} size={18} />
           ) : (
             <LuUpload size={18} />
           )}
@@ -80,7 +109,7 @@ const ProfilePhotoSelector = ({ image, setImage }) => {
       </div>
 
       {/* Hint */}
-      <p className="text-[11px] text-slate-500">Upload profile photo</p>
+      <p className={styles.hint}>Upload profile photo</p>
     </div>
   );
 };
