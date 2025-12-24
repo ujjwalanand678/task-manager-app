@@ -81,7 +81,7 @@ const MyTasks = () => {
   }, [filterStatus]);
 
   return (
-    <DashboardLayout activeMenu="Manage Tasks">
+    <DashboardLayout activeMenu="My Tasks">
       <div className="my-5">
         <div className="flex flex-col md:flex-row md:items-center justify-between gap-3">
           <h2 className="text-xl md:text-xl font-medium">
