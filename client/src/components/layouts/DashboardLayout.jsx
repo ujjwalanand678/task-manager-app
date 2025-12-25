@@ -3,20 +3,114 @@ import { UserContext } from "../../context/UserContext.jsx";
 import Navbar from "./Navbar.jsx";
 import SideMenu from "./SideMenu.jsx";
 
+const glassBlob = `
+
+  rounded-full
+ bg-[radial-gradient(circle_at_top_left,#ffffffb3_0%,#ffffff40_35%,#ffffff00_65%)]
+backdrop-saturate-150
+  border border-white/15
+  backdrop-blur-3xl
+  shadow-[inset_0_1px_1px_rgba(255,255,255,0.2)]
+`;
+
+const styles = {
+  root: `
+  relative min-h-screen w-full
+  overflow-hidden
+z-0
+p-5
+ bg-[#14171E]
+
+`,
+  // bg-[radial-gradient(circle_at_top,#b4faf0_0%,#4edded_45%,#52d1b6_100%)]
+  centerWrapper: `
+    relative z-10
+    flex items-center justify-center
+    min-h-screen w-full
+    px-4
+  `,
+
+  glassCard: `
+  relative z-[1]
+  backdrop-blur-lg
+  flex flex-col  
+  w-full 
+  rounded-3xl
+  
+  border border-white/10
+  shadow-[0_30px_120px_rgba(0,0,0,0.45)]
+`,
+
+  header: `
+  mb-3 text-center
+  `,
+
+  title: `
+    text-[30px]
+    font-semibold
+    text-white/85
+    tracking-tight
+  `,
+
+  subtitle: `
+      text-[16px]
+  text-white/85
+   font-medium
+  `,
+};
 const DashboardLayout = ({ children, activeMenu }) => {
   const { user } = useContext(UserContext);
 
   return (
-    <div className="">
-      <Navbar activeMenu={activeMenu} />
-
+    <div className={styles.root}>
+      {/* Background Blobs */}
+      <div className="absolute inset-0 pointer-events-none">
+        <div
+          className={`absolute top-40 left-[100px] w-60 h-60 animate-blob ${glassBlob}`}
+        />
+        <div
+          className={`absolute top-30 right-[200px] w-40 h-40 animate-blob animation-delay-2000 ${glassBlob}`}
+        />
+        <div
+          className={`absolute bottom-30 right-[100px] w-24 h-24 animate-blob animation-delay-4000 ${glassBlob}`}
+        />
+        <div
+          className={`absolute bottom-32 left-[150px] w-40 h-40 animate-blob-2 ${glassBlob}`}
+        />
+        <div
+          className={`absolute bottom-30 left-[400px] w-48 h-48 ${glassBlob}`}
+        />
+        <div
+          className={`absolute top-30 left-[400px] w-40 h-40 ${glassBlob}`}
+        />
+        <div
+          className={`absolute top-30 right-[400px] w-24 h-24 ${glassBlob}`}
+        />
+        <div
+          className={`absolute bottom-20 right-[300px] w-32 h-32 ${glassBlob}`}
+        />
+      </div>
+ <Navbar activeMenu={activeMenu} />
       {user && (
-        <div className="flex">
-          <div className="max-[1080px]:hidden">
-            <SideMenu activeMenu={activeMenu} />
-          </div>
+        <div className={styles.centerWrapper}>
+          {/* GLASS CARD */}
+         
+          <div className={styles.glassCard}>
+            {/* NAVBAR INSIDE GLASS */}
+            
 
-          <div className="grow mx-5">{children}</div>
+            {/* DASHBOARD BODY */}
+            <div className="flex w-full gap-6 ">
+
+              {/* Sidebar */}
+              <div className="max-[1080px]:hidden shrink-0">
+                <SideMenu activeMenu={activeMenu} />
+              </div>
+
+              {/* Main Content */}
+              <div className="grow overflow-y-auto">{children}</div>
+            </div>
+          </div>
         </div>
       )}
     </div>
