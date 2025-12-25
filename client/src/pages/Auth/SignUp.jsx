@@ -17,47 +17,70 @@ const styles = {
   `,
 
   title: `
-    text-3xl font-bold text-[#003465] tracking-tight text-center mb-1
+      text-[30px]
+    font-semibold
+    text-white/85
+    tracking-tight
   `,
 
   subtitle: `
-    text-sm text-slate-600/80 mb-8 text-center font-medium
+         text-[13px]
+  text-white/85
+   font-medium
+   mb-2
   `,
 
   form: `
-    w-full space-y-5
+  space-y-2
+  
   `,
 
   // Container for the two-column grid
   grid: `
-    grid grid-cols-1 md:grid-cols-2 gap-x-6 gap-y-4
+    grid grid-cols-1 md:grid-cols-2 gap-x-5 gap-y-4
   `,
 
   /* THE CRYSTAL BUTTON */
   submitBtn: `
-    w-full py-3.5 mt-4 rounded-2xl
-    text-[#003465] text-lg font-bold tracking-wide
-    
-    /* High-Gloss Glass Gradient */
-    bg-gradient-to-br from-white/90 via-white/50 to-white/30
-    backdrop-blur-xl
-    border border-white/60
-    shadow-[0_10px_25px_-5px_rgba(0,0,0,0.1)]
+   mt-3
+  w-full py-2 rounded-lg
+  text-black/85 text-[16px] font-semibold 
+  cursor-pointer
+  /* High-Gloss Glass Gradient */
+  bg-gradient-to-br from-white/80 via-white/40 to-white/20
+  
+  /* Frosting & Border */
+  backdrop-blur-xl
+  border border-white/60
+  
+  /* Shadow for Depth */
+  shadow-[0_4px_20px_rgba(0,0,0,0.05)]
 
-    /* Interactions */
-    transition-all duration-300 ease-in-out
-    hover:from-white hover:to-white/40
-    hover:scale-[1.01] 
-    hover:shadow-[0_15px_30px_-5px_rgba(0,0,0,0.15)]
-    active:scale-[0.98]
+  /* Interactions */
+  transition-all duration-300 ease-out
+  hover:bg-gradient-to-br
+  hover:from-black/90
+    hover:via-black/10
+    hover:to-black/10
+    hover:text-[#ffffff]/90
+  hover:scale-[1.02] 
+  hover:shadow-[0px_5px_20px_rgba(255,255,255,0.8)]
+  active:scale-[0.98]
   `,
 
   footer: `
-    text-center text-sm text-slate-600 mt-6 font-medium
+   text-center
+    text-md
+    text-slate-200
   `,
 
   footerLink: `
-    ml-1 font-bold text-[#0085FF] hover:underline transition-all
+      cursor-pointer
+    ml-1
+    text-[15px]
+    font-medium
+    text-[#ffffff]
+    underline
   `,
 
   apiError: `text-center text-xs text-rose-600 font-semibold mb-4 bg-rose-50/50 py-2 rounded-lg`,

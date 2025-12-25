@@ -9,24 +9,29 @@ import { UserContext } from "../../context/UserContext.jsx";
 
 const styles = {
   form: `
-    space-y-6
+    space-y-2
   `,
 
   apiError: `
     text-center
     text-xs
-    text-rose-500
+    text-rose-600
+  font-medium
   `,
 
   fieldError: `
     mt-1
     text-xs
-    text-rose-500
+    font-medium
+    text-rose-600
+   
+ 
   `,
 submitBtn: `
-  w-full py-3.5 rounded-2xl
-  text-[#003465] text-lg font-semibold tracking-wide
-  
+mt-3
+  w-full py-2 rounded-lg
+  text-black/85 text-[16px] font-semibold 
+  cursor-pointer
   /* High-Gloss Glass Gradient */
   bg-gradient-to-br from-white/80 via-white/40 to-white/20
   
@@ -39,23 +44,29 @@ submitBtn: `
 
   /* Interactions */
   transition-all duration-300 ease-out
-  hover:bg-white/60
+  hover:bg-gradient-to-br
+  hover:from-black/90
+    hover:via-black/10
+    hover:to-black/10
+    hover:text-[#ffffff]/90
   hover:scale-[1.02] 
-  hover:shadow-[0_8px_25px_rgba(0,0,0,0.1)]
+  hover:shadow-[0px_4px_18px_rgba(255,255,255,0.8)]
   active:scale-[0.98]
 `,
 
   footer: `
     text-center
-    text-sm
-    text-slate-700
+    text-[14px]
+    text-slate-200
   `,
 
   footerLink: `
+  cursor-pointer
     ml-1
+    text-[14px]
     font-medium
-    text-[#0085FF]
-    hover:underline
+    text-[#ffffff]
+    underline
   `,
 };
 

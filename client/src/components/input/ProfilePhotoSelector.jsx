@@ -3,41 +3,42 @@ import { LuUser, LuUpload, LuTrash } from "react-icons/lu";
 
 const styles = {
   wrapper: `
-    flex flex-col items-center gap-3 mb-6
+    flex flex-col items-center gap-2 mb-2
   `,
 
   /* Polished Glass Avatar Circle */
   avatar: `
-    relative w-28 h-28 rounded-full
-    bg-white/20
+    relative w-24 h-24 rounded-full
+    bg-white/85
     backdrop-blur-2xl
-    border-2 border-white/40
-    shadow-[0_10px_30px_rgba(0,0,0,0.1),inset_0_2px_4px_rgba(255,255,255,0.3)]
+    border-1 border-white/10
+   [box-shadow:inset_0_4px_15px_rgba(0,0,0,0.5)]
     flex items-center justify-center
     transition-all duration-300
-    hover:border-white/60
+   
   `,
 
   avatarIcon: `
-    text-4xl text-[#003465]/40
+    text-3xl text-black/60
   `,
 
   image: `
-    w-[calc(100%-8px)] h-[calc(100%-8px)] rounded-full object-cover 
-    border border-white/20
+    w-[calc(100%-9px)] h-[calc(100%-9px)] rounded-full object-cover w-full h-full
+    border-2 border-white/80
   `,
 
   /* Floating Action Button */
   actionBtn: `
+  cursor-pointer
     absolute bottom-0 right-0
-    w-10 h-10 rounded-full
-    bg-white/90
+    w-9 h-9 rounded-full
+    bg-white/80
     backdrop-blur-md
-    border border-white
+    border border-black/40
     flex items-center justify-center
-    text-[#003465]
+    text-black/70
     shadow-lg
-    hover:bg-white
+    hover:bg-white/90
     hover:scale-110
     active:scale-90
     transition-all duration-200
@@ -48,7 +49,7 @@ const styles = {
   `,
 
   hint: `
-    text-[12px] font-bold text-[#003465]/60 uppercase tracking-widest
+    text-[12px] font-semibold text-white/80 uppercase tracking-widest
   `,
 };
 const ProfilePhotoSelector = ({ image, setImage }) => {

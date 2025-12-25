@@ -9,10 +9,10 @@ const styles = {
   label: `
     mb-1
     block
-    text-[13px]
+    text-[16px]
     font-medium
-    text-slate-700
-    tracking-wide
+    text-white/90
+    
   `,
 
   inputWrapper: `
@@ -20,15 +20,13 @@ const styles = {
   `,
 
 inputBase: `
-  w-full px-5 py-3.5 rounded-2xl
-
-  /* Subtler Glass Base */
-  bg-white/10
-  backdrop-blur-md
+  w-full px-4 py-2 rounded-lg
+  bg-white/80
+  backdrop-blur-lg
+text-[15px]
+   text-black/80
   
-  /* Typography */
-  text-slate-800
-  placeholder:text-slate-600/70
+  placeholder:text-slate-500
   font-medium
 
   /* Crisp Border */
@@ -36,27 +34,27 @@ inputBase: `
   outline-none
 
   /* Inner shadow for "carved" look */
-  shadow-[inset_0_2px_4px_rgba(0,0,0,0.02)]
+  inset-shadow-sm inset-shadow-black/30
 
   /* Focus States */
-  focus:bg-white/30
+  focus:bg-white/80
   focus:border-white/50
-  focus:ring-2
-  focus:ring-white/20
-  focus:shadow-lg
+  focus:outline-none
+  focus:shadow-[0px_2px_18px_rgba(255,255,255,0.8)]
+  
 
   transition-all duration-300
 `,
 
   inputError: `
-    border-rose-400/60
+    border-rose-400/70
     focus:border-rose-400
     focus:ring-rose-400/35
   `,
 
   eyeButton: `
     absolute right-3 top-1/2 -translate-y-1/2
-    text-slate-500/70
+    text-slate-900/90
     hover:text-slate-800
     transition-colors
   `,

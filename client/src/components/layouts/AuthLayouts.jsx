@@ -13,10 +13,11 @@ const styles = {
   root: `
   relative min-h-screen w-full
   overflow-hidden
-bg-[radial-gradient(circle_at_top,#b4faf0_0%,#4edded_45%,#52d1b6_100%)]
+
+ bg-[#14171E]
 
 `,
-
+// bg-[radial-gradient(circle_at_top,#b4faf0_0%,#4edded_45%,#52d1b6_100%)]
   centerWrapper: `
     relative z-10
     flex items-center justify-center
@@ -26,23 +27,23 @@ bg-[radial-gradient(circle_at_top,#b4faf0_0%,#4edded_45%,#52d1b6_100%)]
 
   glassCard: `
     relative z-[1]
-    backdrop-blur-md
+    backdrop-blur-lg
     flex items-center justify-center
     w-full max-w-[900px]
     rounded-3xl
     p-10
-    bg-[radial-gradient(circle,#0085FF_10%,#003465_100%)]/30
+ border border-white/10
     shadow-[0_30px_120px_rgba(0,0,0,0.45)]
   `,
 
   card: `
   relative z-10
-  w-full max-w-md
+  w-auto min-w-[350px] max-h-screen
   flex flex-col items-center justify-center
   rounded-[32px]
-  p-10 md:p-12
+  p-4 md:p-8
   
-  bg-gradient-to-b from-white/20 to-white/5
+  bg-gradient-to-br from-white/10 to-white/10
   backdrop-blur-2xl
   backdrop-saturate-[180%] 
   
@@ -53,20 +54,20 @@ bg-[radial-gradient(circle_at_top,#b4faf0_0%,#4edded_45%,#52d1b6_100%)]
 `,
 
   header: `
-    mb-8 text-center
+  mb-3 text-center
   `,
 
   title: `
     text-[30px]
     font-semibold
-    text-white
+    text-white/85
     tracking-tight
   `,
 
   subtitle: `
-    mt-1
-    text-[14px]
-    text-white/80
+      text-[16px]
+  text-white/85
+   font-medium
   `,
 };
 
