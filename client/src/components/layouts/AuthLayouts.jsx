@@ -38,7 +38,7 @@ const styles = {
 
   card: `
   relative z-10
-  w-auto min-w-[350px] max-h-screen
+  w-auto min-w-[320px] max-h-screen
   flex flex-col items-center justify-center
   rounded-[32px]
   p-4 md:p-8

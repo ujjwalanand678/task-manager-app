@@ -145,7 +145,7 @@ const Login = () => {
           <Input
             label="Password"
             type="password"
-            placeholder="••••••••"
+            placeholder="your password"
             value={password}
             onChange={(e) => setPassword(e.target.value)}
             error={!!errors.password}
