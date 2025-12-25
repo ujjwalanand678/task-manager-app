@@ -13,7 +13,7 @@ import TaskListTable from "../../components/TaskListTable.jsx";
 import CustomPieChart from "../../components/Charts/CustomPieChart.jsx";
 import CustomBarChart from "../../components/Charts/CustomBarChart.jsx";
 
-const COLORS = ["#8D51FF", "#00B8DB", "#7BCE00"];
+const COLORS = ["#0d6efd","#8D51FF", "#00B8DB", "#7BCE00"];
 
 const Dashboard = () => {
   useUserAuth();
@@ -71,25 +71,25 @@ const Dashboard = () => {
 
   return (
     <DashboardLayout activeMenu="Dashboard">
-      <div className="card my-5">
-        <div>
+      <div className="bg-white/5 p-4 rounded-lg shadow-sm mb-6 mt-5 mr-5">
+        <div >
           <div className="col-span-3">
-            <h2 className="text-xl md:text-2xl">Good Morning! {user?.name}</h2>
+            <h2 className="text-xl md:text-2xl text-white/90">Good Morning! {user?.name}</h2>
 
-            <p className="text-xs md:text-[13px] text-gray-400 mt-1.5">
+            <p className="text-xs md:text-[13px] text-white/90 mt-1.5">
               {moment().format("dddd Do MMM YYYY")}
             </p>
           </div>
         </div>
 
-        <div className="grid grid-cols-2 sm:grid-cols-2 md:grid-cols-4 gap-3 md:gap-5">
+        <div className="mt-1 grid grid-cols-2 sm:grid-cols-2 md:grid-cols-4 gap-3 md:gap-5">
           <InfoCard
             // icon={<IoMdCard />}
             label="Total Tasks"
             value={addThousandsSeparator(
               dashboardData?.charts?.taskDistribution?.All || 0
             )}
-            color="bg-primary"
+            color="bg-[#0d6efd]"
           />
           <InfoCard
             label="Pending Tasks"

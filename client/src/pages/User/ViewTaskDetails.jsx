@@ -7,7 +7,6 @@ import AvatarGroup from "../../components/AvatarGroup";
 import moment from "moment";
 import { LuSquareArrowOutUpRight } from "react-icons/lu";
 
-
 const ViewTaskDetails = () => {
   const { id } = useParams();
   const [task, setTask] = useState(null);
@@ -38,44 +37,39 @@ const ViewTaskDetails = () => {
     }
   };
 
-// handle todo check
-const updateTodoChecklist = async (index) => {
-  const todoChecklist = [...task?.todoChecklist];
-  const taskId = id;
+  // handle todo check
+  const updateTodoChecklist = async (index) => {
+    const todoChecklist = [...task?.todoChecklist];
+    const taskId = id;
 
-  if (todoChecklist && todoChecklist[index]) {
-    todoChecklist[index].completed =
-      !todoChecklist[index].completed;
+    if (todoChecklist && todoChecklist[index]) {
+      todoChecklist[index].completed = !todoChecklist[index].completed;
 
-    try {
-      const response = await axiosInstance.put(
-        API_PATHS.TASKS.UPDATE_TODO_CHECKLIST(taskId),
-        { todoChecklist }
-      );
+      try {
+        const response = await axiosInstance.put(
+          API_PATHS.TASKS.UPDATE_TODO_CHECKLIST(taskId),
+          { todoChecklist }
+        );
 
-      if (response.status === 200) {
-        setTask(response.data?.task || task);
-      } else {
-        // Optionally revert the toggle if the API call fails
-        todoChecklist[index].completed =
-          !todoChecklist[index].completed;
+        if (response.status === 200) {
+          setTask(response.data?.task || task);
+        } else {
+          // Optionally revert the toggle if the API call fails
+          todoChecklist[index].completed = !todoChecklist[index].completed;
+        }
+      } catch (error) {
+        todoChecklist[index].completed = !todoChecklist[index].completed;
       }
-    } catch (error) {
-      todoChecklist[index].completed =
-        !todoChecklist[index].completed;
     }
-  }
-};
+  };
 
-
-// Handle attachment link click
-const handleLinkClick = (link) => {
-  if (!/^https?:\/\//i.test(link)) {
-    link = "https://" + link; // Default to HTTPS
-  }
-  window.open(link, "_blank");
-};
-
+  // Handle attachment link click
+  const handleLinkClick = (link) => {
+    if (!/^https?:\/\//i.test(link)) {
+      link = "https://" + link; // Default to HTTPS
+    }
+    window.open(link, "_blank");
+  };
 
   useEffect(() => {
     if (id) {
@@ -105,18 +99,12 @@ const handleLinkClick = (link) => {
               </div>
 
               <div className="mt-4">
-                <InfoBox
-                  label="Description"
-                  value={task?.description}
-                />
+                <InfoBox label="Description" value={task?.description} />
               </div>
 
               <div className="grid grid-cols-12 gap-4 mt-4">
                 <div className="col-span-6 md:col-span-4">
-                  <InfoBox
-                    label="Priority"
-                    value={task?.priority}
-                  />
+                  <InfoBox label="Priority" value={task?.priority} />
                 </div>
 
                 <div className="col-span-6 md:col-span-4">
@@ -124,9 +112,7 @@ const handleLinkClick = (link) => {
                     label="Due Date"
                     value={
                       task?.dueDate
-                        ? moment(task?.dueDate).format(
-                            "Do MMM YYYY"
-                          )
+                        ? moment(task?.dueDate).format("Do MMM YYYY")
                         : "N/A"
                     }
                   />
@@ -139,9 +125,8 @@ const handleLinkClick = (link) => {
 
                   <AvatarGroup
                     avatars={
-                      task?.assignedTo?.map(
-                        (item) => item?.profileImageUrl
-                      ) || []
+                      task?.assignedTo?.map((item) => item?.profileImageUrl) ||
+                      []
                     }
                     maxVisible={5}
                   />
@@ -158,29 +143,26 @@ const handleLinkClick = (link) => {
                     key={`todo_${index}`}
                     text={item.text}
                     isChecked={item.completed}
-                    onChange={() =>
-                      updateTodoChecklist(index)
-                    }
+                    onChange={() => updateTodoChecklist(index)}
                   />
                 ))}
               </div>
               {task?.attachments?.length > 0 && (
-  <div className="mt-2">
-    <label className="text-xs font-medium text-slate-500">
-      Attachments
-    </label>
+                <div className="mt-2">
+                  <label className="text-xs font-medium text-slate-500">
+                    Attachments
+                  </label>
 
-    {task?.attachments?.map((link, index) => (
-      <Attachment
-        key={`link_${index}`}
-        link={link}
-        index={index}
-        onClick={() => handleLinkClick(link)}
-      />
-    ))}
-  </div>
-)}
-
+                  {task?.attachments?.map((link, index) => (
+                    <Attachment
+                      key={`link_${index}`}
+                      link={link}
+                      index={index}
+                      onClick={() => handleLinkClick(link)}
+                    />
+                  ))}
+                </div>
+              )}
             </div>
           </div>
         )}
@@ -194,9 +176,7 @@ export default ViewTaskDetails;
 const InfoBox = ({ label, value }) => {
   return (
     <>
-      <label className="text-xs font-medium text-slate-500">
-        {label}
-      </label>
+      <label className="text-xs font-medium text-slate-500">{label}</label>
       <p className="text-[13px] md:text-[13px] font-medium text-gray-700 mt-0.5">
         {value}
       </p>
@@ -217,7 +197,6 @@ const TodoCheckList = ({ text, isChecked, onChange }) => {
   );
 };
 
-
 const Attachment = ({ link, index, onClick }) => {
   return (
     <div
@@ -229,9 +208,7 @@ const Attachment = ({ link, index, onClick }) => {
           {index < 9 ? `0${index + 1}` : index + 1}
         </span>
 
-        <p className="text-xs text-black truncate">
-          {link}
-        </p>
+        <p className="text-xs text-black truncate">{link}</p>
       </div>
 
       <LuSquareArrowOutUpRight className="text-gray-400" />
