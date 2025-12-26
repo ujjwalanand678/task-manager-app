@@ -5,6 +5,20 @@ import axiosInstance from "../../utils/axiosInstance";
 import Model from "../Model";
 import AvatarGroup from "../AvatarGroup";
 
+const styles = {
+  cardBtn: `
+  cursor-pointer
+  px-3 py-1.5
+  text-white/90
+    rounded-md
+    
+    font-medium
+    border border-white
+  text-nowrap
+ hover:shadow-[0_4px_20px_rgba(255,255,255,0.3)]
+    flex items-center
+    bg-white/10 hover:bg-white/20 `,
+};
 const SelectUsers = ({ selectedUsers, setSelectedUsers }) => {
   const [allUsers, setAllUsers] = useState([]);
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -54,14 +68,18 @@ const SelectUsers = ({ selectedUsers, setSelectedUsers }) => {
   return (
     <div className="space-y-4 mt-2">
       {selectedUserAvatars.length === 0 && (
-        <button
-          className="card-btn"
-          onClick={() => setIsModalOpen(true)}
-        >
+        <button className={styles.cardBtn} onClick={() => setIsModalOpen(true)}>
             <AvatarGroup avatars={selectedUserAvatars} maxVisible={3} />
-          <LuUsers className="text-sm" />
+          <LuUsers className="pr-2 font-bold" size={24}/>
           Add Members
         </button>
+          )}
+         {selectedUserAvatars.length > 0 && (
+        <div className="cursor-pointer" onClick={() => setIsModalOpen(true)}>
+            <AvatarGroup avatars={selectedUserAvatars} maxVisible={3} />
+         
+         
+        </div>
       )}
 
 <Model
@@ -82,10 +100,10 @@ const SelectUsers = ({ selectedUsers, setSelectedUsers }) => {
         />
 
         <div className="flex-1">
-          <p className="font-medium text-gray-800 dark:text-white">
+          <p className="font-medium text-white/90 dark:text-white">
             {user.name}
           </p>
-          <p className="text-[13px] text-gray-500">
+          <p className="text-[13px] text-white/90">
             {user.email}
           </p>
         </div>
@@ -102,14 +120,14 @@ const SelectUsers = ({ selectedUsers, setSelectedUsers }) => {
 
   <div className="flex justify-end gap-4 pt-4">
   <button
-    className="card-btn"
+    className={styles.cardBtn} 
     onClick={() => setIsModalOpen(false)}
   >
     CANCEL
   </button>
 
   <button
-    className="card-btn-fill"
+    className={styles.cardBtn} 
     onClick={handleAssign}
   >
     DONE

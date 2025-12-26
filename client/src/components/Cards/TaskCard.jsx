@@ -108,7 +108,7 @@ const TaskCard = ({
       </div>
 
       {/* Footer */}
-      <div className="flex items-center justify-between mt-3">
+      <div className="flex items-center justify-between mt-3 mx-4">
         <AvatarGroup avatars={assignedTo || []} />
 
         {attachmentCount > 0 && (

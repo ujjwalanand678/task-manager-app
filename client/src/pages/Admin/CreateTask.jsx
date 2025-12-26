@@ -54,7 +54,6 @@ const CreateTask = () => {
   };
 
   // Create Task
-  // Create Task
   const createTask = async () => {
     setLoading(true);
 
@@ -149,24 +148,21 @@ const CreateTask = () => {
     }
   };
 
-// Delete Task
-const deleteTask = async () => {
-  try {
-    await axiosInstance.delete(
-      API_PATHS.TASKS.DELETE_TASK(taskId)
-    );
+  // Delete Task
+  const deleteTask = async () => {
+    try {
+      await axiosInstance.delete(API_PATHS.TASKS.DELETE_TASK(taskId));
 
-    setOpenDeleteAlert(false);
-    toast.success("Expense details deleted successfully");
-    navigate("/admin/tasks");
-  } catch (error) {
-    console.error(
-      "Error deleting expense:",
-      error.response?.data?.message || error.message
-    );
-  }
-};
-
+      setOpenDeleteAlert(false);
+      toast.success("Expense details deleted successfully");
+      navigate("/admin/tasks");
+    } catch (error) {
+      console.error(
+        "Error deleting expense:",
+        error.response?.data?.message || error.message
+      );
+    }
+  };
 
   // Fetch task details on ID change
   useEffect(() => {
@@ -179,17 +175,30 @@ const deleteTask = async () => {
 
   return (
     <DashboardLayout activeMenu="Create Task">
-      <div className="mt-5">
+      <div
+        className="
+        
+    bg-white/5
+    p-8
+    backdrop-blur-xl
+    border border-white/20
+    transition-all
+    rounded-r-3xl
+    rounded-l-none
+    
+   
+  "
+      >
         <div className="grid grid-cols-1 md:grid-cols-4 mt-4">
-          <div className="form-card col-span-3">
+          <div className="w-full md:col-span-2 lg:col-span-4">
             <div className="flex items-center justify-between">
-              <h2 className="text-xl md:text-2xl font-medium">
+              <h2 className="text-xl md:text-2xl font-medium text-white/90">
                 {taskId ? "Update Task" : "Create Task"}
               </h2>
 
               {taskId && (
                 <button
-                  className="flex items-center gap-1.5 text-[13px] font-medium"
+                  className="flex items-center gap-1.5 text-[13px] font-medium text-red-400 hover:text-red-300 transition-colors"
                   onClick={() => setOpenDeleteAlert(true)}
                 >
                   <LuTrash2 /> Delete
@@ -198,8 +207,21 @@ const deleteTask = async () => {
             </div>
 
             <div className="mt-4">
-              <label>Task Title</label>
+              <label className="text-sm font-medium text-white/90">
+                Task Title
+              </label>
               <input
+                className="
+            mt-1 w-full
+            bg-white/10
+            border border-white/70
+            rounded-md
+            px-3 py-2
+            text-white
+            placeholder:text-white/70
+            focus:outline-none
+            focus:border-white
+          "
                 placeholder="Create App UI"
                 value={taskData.title}
                 onChange={({ target }) =>
@@ -207,14 +229,25 @@ const deleteTask = async () => {
                 }
               />
             </div>
+
             <div className="mt-3">
-              <label className="text-xs font-medium text-slate-600">
+              <label className="text-sm font-medium text-white/90">
                 Description
               </label>
 
               <textarea
                 placeholder="Describe task"
-                className="form-input"
+                className="
+            mt-1 w-full
+            bg-white/10
+            border border-white/70
+            rounded-md
+            px-3 py-2
+            text-white
+            placeholder:text-white/70
+            focus:outline-none
+            focus:border-white
+          "
                 rows={4}
                 value={taskData.description}
                 onChange={({ target }) =>
@@ -222,9 +255,10 @@ const deleteTask = async () => {
                 }
               />
             </div>
-            <div className="grid grid-cols-12 gap-4 mt-2">
-              <div className="col-span-6 md:col-span-4">
-                <label className="text-xs font-medium text-slate-600">
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mt-4">
+              {/* Priority */}
+              <div>
+                <label className="text-sm font-medium text-white/90">
                   Priority
                 </label>
 
@@ -235,38 +269,49 @@ const deleteTask = async () => {
                   placeholder="Select Priority"
                 />
               </div>
-            </div>
-            <div className="col-span-6 md:col-span-4">
-              <label className="text-xs font-medium text-slate-600">
-                Due Date
-              </label>
 
-              <input
-                placeholder="Create App UI"
-                className="form-input"
-                value={taskData.dueDate}
-                onChange={({ target }) =>
-                  handleValueChange("dueDate", target.value)
-                }
-                type="date"
-              />
-            </div>
+              {/* Due Date */}
+              <div>
+                <label className="text-sm font-medium text-white/90">
+                  Due Date
+                </label>
 
-            <div className="col-span-12 md:col-span-3">
-              <label className="text-xs font-medium text-slate-600">
-                Assign To
-              </label>
+                <input
+                  className="
+        mt-1 w-full
+        bg-white/10
+        border border-white/20
+        rounded-md
+        px-3 py-2
+        text-white
+        focus:outline-none
+        focus:border-white/40
+      "
+                  value={taskData.dueDate}
+                  onChange={({ target }) =>
+                    handleValueChange("dueDate", target.value)
+                  }
+                  type="date"
+                />
+              </div>
 
-              <SelectUsers
-                selectedUsers={taskData.assignedTo}
-                setSelectedUsers={(value) => {
-                  handleValueChange("assignedTo", value);
-                }}
-              />
+              {/* Assign To */}
+              <div>
+                <label className="text-sm font-medium text-white/90">
+                  Assign To
+                </label>
+
+                <SelectUsers
+                  selectedUsers={taskData.assignedTo}
+                  setSelectedUsers={(value) => {
+                    handleValueChange("assignedTo", value);
+                  }}
+                />
+              </div>
             </div>
 
             <div className="mt-3">
-              <label className="text-xs font-medium text-slate-600">
+              <label className="text-sm font-medium text-white/90">
                 TODO Checklist
               </label>
 
@@ -279,7 +324,7 @@ const deleteTask = async () => {
             </div>
 
             <div className="mt-3">
-              <label className="text-xs font-medium text-slate-600">
+              <label className="text-sm font-medium text-white/90">
                 Add Attachments
               </label>
 
@@ -290,13 +335,26 @@ const deleteTask = async () => {
                 }
               />
             </div>
+
             {error && (
-              <p className="text-xs font-medium text-red-500 mt-5">{error}</p>
+              <p className="text-xs font-medium text-red-400 mt-5">{error}</p>
             )}
 
-            <div className="flex justify-end mt-7">
+            <div className="flex justify-center mt-7">
               <button
-                className="add-btn"
+                className="
+w-full 
+     cursor-pointer
+            px-6 py-2
+            rounded-md
+            bg-white/20
+            text-white
+            font-semibold
+            border border-white/30
+            hover:bg-white/30
+            transition-all
+             hover:shadow-[0_4px_20px_rgba(255,255,255,0.3)]
+          "
                 onClick={handleSubmit}
                 disabled={loading}
               >
@@ -306,17 +364,17 @@ const deleteTask = async () => {
           </div>
         </div>
       </div>
-      <Model
-  isOpen={openDeleteAlert}
-  onClose={() => setOpenDeleteAlert(false)}
-  title="Delete Task"
->
-  <DeleteAlert
-    content="Are you sure you want to delete this task?"
-    onDelete={() => deleteTask()}
-  />
-</Model>
 
+      <Model
+        isOpen={openDeleteAlert}
+        onClose={() => setOpenDeleteAlert(false)}
+        title="Delete Task"
+      >
+        <DeleteAlert
+          content="Are you sure you want to delete this task?"
+          onDelete={() => deleteTask()}
+        />
+      </Model>
     </DashboardLayout>
   );
 };

@@ -1,6 +1,19 @@
 import React, { useState } from "react";
 import { HiMiniPlus, HiOutlineTrash } from "react-icons/hi2";
 
+const styles = {
+  cardBtn: `
+  cursor-pointer
+  px-3 py-1.5
+  text-white/90
+    rounded-md
+    font-medium
+    border border-white
+  text-nowrap
+ hover:shadow-[0_4px_20px_rgba(255,255,255,0.3)]
+    flex items-center
+    bg-white/10 hover:bg-white/20 `,
+};
 const TodoListInput = ({ todoList, setTodoList }) => {
   const [option, setOption] = useState("");
 
@@ -23,20 +36,20 @@ const TodoListInput = ({ todoList, setTodoList }) => {
       {todoList.map((item, index) => (
         <div
           key={item}
-          className="flex justify-between bg-gray-50 border border-gray-100 p-3 rounded mb-2"
+          className="flex justify-between bg-white/20 border border-gray-100 px-3 py-2 rounded mb-2 mt-1"
         >
-          <p className="text-xs text-black">
-            <span className="text-xs text-gray-400 font-semibold mr-2">
-              {index < 9 ? `0${index + 1}` : index + 1}
+          <p className="text-[15px] text-white">
+            <span className="text-sm text-white font-semibold mr-2">
+              {index < 9 ? `0${index + 1}` : index + 1}{" )"}
             </span>
             {item}
           </p>
 
           <button
-            className="cursor-pointer"
+          
             onClick={() => handleDeleteOption(index)}
           >
-            <HiOutlineTrash className="text-lg text-red-500" />
+            <HiOutlineTrash className="text-lg text-red-500 cursor-pointer  hover:drop-shadow-[0_0_10px_rgba(255,0,0,1)] " />
           </button>
         </div>
       ))}
@@ -47,11 +60,11 @@ const TodoListInput = ({ todoList, setTodoList }) => {
           placeholder="Enter Task"
           value={option}
           onChange={({ target }) => setOption(target.value)}
-          className="w-full text-[13px] text-black outline-none bg-white border border-gray-200 rounded px-3 py-2"
+          className="w-full bg-white/10 text-[13px] text-white/90 outline-none placeholder:text-white/80 border border-white    rounded px-3 py-2"
         />
 
         <button
-          className="card-btn text-nowrap"
+               className={styles.cardBtn} 
           onClick={handleAddOption}
         >
           <HiMiniPlus className="text-lg" />
