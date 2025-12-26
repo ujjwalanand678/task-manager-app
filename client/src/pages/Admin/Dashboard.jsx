@@ -13,7 +13,7 @@ import TaskListTable from "../../components/TaskListTable.jsx";
 import CustomPieChart from "../../components/Charts/CustomPieChart.jsx";
 import CustomBarChart from "../../components/Charts/CustomBarChart.jsx";
 
-const COLORS = ["#0d6efd","#8D51FF", "#00B8DB", "#7BCE00"];
+const COLORS = ["#9B8CFF", "#00E5FF", "#B6FF2E"];
 
 const Dashboard = () => {
   useUserAuth();
@@ -71,10 +71,12 @@ const Dashboard = () => {
 
   return (
     <DashboardLayout activeMenu="Dashboard">
-      <div className="bg-white/5 p-4 rounded-lg shadow-sm mb-6 mt-5 mr-5">
-        <div >
+      <div className="bg-white/5 p-8 backdrop-blur-md border border-white/20 transition-all rounded-lg shadow-sm mb-6 mt-5 mr-5 ">
+        <div>
           <div className="col-span-3">
-            <h2 className="text-xl md:text-2xl text-white/90">Good Morning! {user?.name}</h2>
+            <h2 className="text-xl md:text-2xl text-white/90">
+              Good Morning! {user?.name}
+            </h2>
 
             <p className="text-xs md:text-[13px] text-white/90 mt-1.5">
               {moment().format("dddd Do MMM YYYY")}
@@ -116,33 +118,46 @@ const Dashboard = () => {
           />
         </div>
       </div>
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-6 my-4 md:my-6">
+      <div className=" grid grid-cols-1 md:grid-cols-2 gap-6 my-4 md:my-6">
         <div>
-          <div className="card">
+          <div
+            className="hover:shadow-[0_0_25px_rgba(255,255,255,0.35)]
+           bg-white/5 backdrop-blur-md border border-white/20 py-8 px-6 rounded-2xl shadow-xl transition-all  "
+          >
             <div className="flex items-center justify-between">
-              <h5 className="font-medium">Task Distribution</h5>
+              <h5 className="font-medium text-white/90">Task Distribution</h5>
             </div>
 
             <CustomPieChart data={pieChartData} colors={COLORS} />
           </div>
         </div>
-           <div>
-          <div className="card">
+        <div>
+          <div
+            className="hover:shadow-[0_0_25px_rgba(255,255,255,0.35)]
+             bg-white/5 backdrop-blur-md border border-white/20 p-8 rounded-2xl mr-5 transition-all "
+          >
             <div className="flex items-center justify-between">
-              <h5 className="font-medium">Task Priority Levels</h5>
+              <h5 className="font-medium text-white/90">
+                Task Priority Levels
+              </h5>
             </div>
 
             <CustomBarChart data={barChartData} />
           </div>
         </div>
 
-        <div className="md:col-span-2">
-          <div className="card">
+        <div className="md:col-span-2 ">
+          <div className="bg-white/5 p-4 rounded-lg  mr-5 backdrop-blur-md border border-white/20">
             <div className="flex items-center justify-between">
-              <h5 className="text-lg">Recent Tasks</h5>
+              <h5 className="text-lg font-semibold text-white/90">
+                Recent Tasks
+              </h5>
 
-              <button className="card-btn" onClick={onSeeMore}>
-                See All <LuArrowRight className="text-base" />
+              <button
+                className="text-white/90 flex items-center gap-2 font-semibold bg-white/10 rounded-md px-3 py-1 cursor-pointer"
+                onClick={onSeeMore}
+              >
+                See All <LuArrowRight />
               </button>
             </div>
 

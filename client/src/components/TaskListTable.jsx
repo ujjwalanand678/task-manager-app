@@ -33,16 +33,16 @@ const TaskListTable = ({ tableData }) => {
       <table className="min-w-full">
         <thead>
           <tr className="text-left">
-            <th className="py-3 px-4 text-gray-800 font-medium text-[13px]">
+            <th className="py-3 px-4 text-white/90 font-medium text-[14px]">
               Name
             </th>
-            <th className="py-3 px-4 text-gray-800 font-medium text-[13px]">
+            <th className="py-3 px-4 text-white/90 font-medium text-[14px]">
               Status
             </th>
-            <th className="py-3 px-4 text-gray-800 font-medium text-[13px]">
+            <th className="py-3 px-4 text-white/90 font-medium text-[14px]">
               Priority
             </th>
-            <th className="py-3 px-4 text-gray-800 font-medium text-[13px] hidden md:table-cell">
+            <th className="py-3 px-4 text-white/90 font-medium text-[14px] hidden md:table-cell">
               Created On
             </th>
           </tr>
@@ -54,13 +54,13 @@ const TaskListTable = ({ tableData }) => {
               key={task._id}
               className="border-t border-gray-200"
             >
-              <td className="my-3 mx-4 text-gray-700 text-[13px] line-clamp-1 overflow-hidden">
+              <td className="my-3 mx-4 text-white/90 text-[14px] line-clamp-1 overflow-hidden">
                 {task.title}
               </td>
 
               <td className="">
                 <span
-                  className={`px-2 py-1 text-xs rounded inline-block ${getStatusBadgeColor(
+                  className={`px-2 py-1 text-xs font-medium rounded inline-block ${getStatusBadgeColor(
                     task.status
                   )}`}
                 >
@@ -70,7 +70,7 @@ const TaskListTable = ({ tableData }) => {
 
               <td className="">
                 <span
-                  className={`px-2 py-1 text-xs rounded inline-block ${getPriorityBadgeColor(
+                  className={`mx-5 px-2 py-1 text-xs font-medium rounded inline-block ${getPriorityBadgeColor(
                     task.priority
                   )}`}
                 >
@@ -78,7 +78,7 @@ const TaskListTable = ({ tableData }) => {
                 </span>
               </td>
 
-              <td className="hidden md:table-cell">
+              <td className="hidden md:table-cell text-white/90">
                 {task.createdAt
                   ? moment(task.createdAt).format("Do MMM YYYY")
                   : ""}

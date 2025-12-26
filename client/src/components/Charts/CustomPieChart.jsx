@@ -12,17 +12,29 @@ import CustomLegend from "./CustomLegend";
 
 const CustomPieChart = ({ data, colors }) => {
   return (
-    <ResponsiveContainer width="100%" height={325}>
+    <>
+    
+    <ResponsiveContainer width="100%" height={325} >
       <PieChart>
-        <Pie
+        <Pie 
           data={data}
-          dataKey="count"
-          nameKey="status"
-          cx="50%"
-          cy="50%"
-          outerRadius={130}
-          innerRadius={100}
-          labelLine={false}
+            dataKey="count"
+            nameKey="status"
+            cx="50%"
+            cy="50%"
+            innerRadius={95}
+            outerRadius={135}
+            paddingAngle={4}
+            cornerRadius={12}
+            startAngle={90}
+            endAngle={-270}
+            isAnimationActive
+            animationDuration={900}
+            animationEasing="ease-out"
+            labelLine={false}
+            stroke="#ffffff/20"
+            strokeWidth={3}
+            
         >
           {data.map((entry, index) => (
             <Cell
@@ -36,7 +48,7 @@ const CustomPieChart = ({ data, colors }) => {
         <Legend content={<CustomLegend/>}/>
       </PieChart>
     </ResponsiveContainer>
-  );
+  </>)
 };
 
 export default CustomPieChart;

@@ -94,7 +94,7 @@ const handleDownloadReport = async () => {
 <DashboardLayout activeMenu="Manage Tasks">
   <div className="my-5">
     <div className="flex flex-col md:flex-row md:items-center justify-between gap-3">
-      <h2 className="text-xl md:text-xl font-medium">
+      <h2 className="text-2xl md:text-2xl font-medium text-white/90">
         My Tasks
       </h2>
 
@@ -108,7 +108,7 @@ const handleDownloadReport = async () => {
     </div>
 
     {tabs?.[0]?.count > 0 && (
-      <div className="flex items-center gap-3 mt-4">
+      <div className="flex items-center gap-3 mt-4 justify-between">
         <TaskStatusTabs
           tabs={tabs}
           activeTab={filterStatus}
@@ -116,7 +116,7 @@ const handleDownloadReport = async () => {
         />
 
         <button
-          className="hidden lg:flex download-btn"
+          className="mt-3 mr-6 cursor-pointer flex bg-white/80 hover:bg-white/90 transition-all px-4 py-2 rounded-md text-sm items-center gap-2"
           onClick={handleDownloadReport}
         >
           <LuFileSpreadsheet className="text-lg" />

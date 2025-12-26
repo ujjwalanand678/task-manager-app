@@ -14,7 +14,7 @@ import {
 const CustomTooltip = ({ active, payload }) => {
   if (active && payload && payload.length) {
     return (
-      <div className="bg-white shadow-md rounded-lg p-2 border border-gray-300">
+      <div className="bg-white/90 shadow-md rounded-lg p-2 border border-gray-300">
         <p className="text-xs font-semibold text-purple-800 mb-1">
           {payload[0].payload.priority}
         </p>
@@ -36,30 +36,30 @@ const CustomBarChart = ({ data }) => {
   const getBarColor = (entry) => {
     switch (entry?.priority) {
       case "Low":
-        return "#00BC7D";
+        return "#00ffaaff";
       case "Medium":
-        return "#FE9900";
+        return "#ffa724ff";
       case "High":
-        return "#FF1F57";
+        return "#ff0040ff";
       default:
-        return "#00BC7D";
+        return "#00ffaaff";
     }
   };
 
   return (
-    <div className="bg-white mt-6">
+    <div className="bg-white/5 mt-4 pt-2  rounded-lg border border-white/10 ">
       <ResponsiveContainer width="100%" height={300}>
         <BarChart data={data}>
           <CartesianGrid stroke="none" />
 
           <XAxis
             dataKey="priority"
-            tick={{ fontSize: 12, fill: "#555" }}
+            tick={{ fontSize: 13, fill: "#f4f4f4ff" }}
             stroke="none"
           />
 
           <YAxis
-            tick={{ fontSize: 12, fill: "#555" }}
+            tick={{ fontSize: 13, fill: "#f4f4f4ff" }}
             stroke="none"
           />
 
@@ -71,7 +71,7 @@ const CustomBarChart = ({ data }) => {
           <Bar
             dataKey="count"
             nameKey="priority"
-            fill="#FF8042"
+            fill="#ff7c3bff"
             radius={[10, 10, 0, 0]}
             activeDot={{ r: 8, fill: "yellow" }}
             activeStyle={{ fill: "green" }}

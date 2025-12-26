@@ -7,13 +7,25 @@ const AvatarGroup = ({ avatars, maxVisible = 3 }) => {
         <img
           key={index}
           src={avatar}
-          alt={`Avatar ${index}`}
-          className="w-9 h-9 rounded-full border-2 border-white -ml-3 first:ml-0"
+          alt=""
+          className="
+            w-9 h-9 rounded-full
+            border border-white/30
+            -ml-3 first:ml-0
+            backdrop-blur-sm
+          "
         />
       ))}
 
       {avatars.length > maxVisible && (
-        <div className="w-9 h-9 flex items-center justify-center bg-blue-50 text-blue-600 text-sm font-medium rounded-full border-2 border-white -ml-3">
+        <div
+          className="
+            w-9 h-9 flex items-center justify-center
+            bg-white/15 text-white text-sm
+            rounded-full border border-white/30
+            -ml-3 backdrop-blur-md
+          "
+        >
           +{avatars.length - maxVisible}
         </div>
       )}

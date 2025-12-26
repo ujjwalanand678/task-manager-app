@@ -78,16 +78,16 @@ const DashboardLayout = ({ children, activeMenu }) => {
           className={`absolute bottom-32 left-[150px] w-40 h-40 animate-blob-2 ${glassBlob}`}
         />
         <div
-          className={`absolute bottom-30 left-[400px] w-48 h-48 ${glassBlob}`}
+          className={`absolute bottom-30 left-[400px] w-48 h-48 animate-blob-2 ${glassBlob}`}
         />
         <div
-          className={`absolute top-30 left-[400px] w-40 h-40 ${glassBlob}`}
+          className={`absolute top-30 left-[400px] w-40 h-40 animate-blob-2 ${glassBlob}`}
         />
         <div
-          className={`absolute top-30 right-[400px] w-24 h-24 ${glassBlob}`}
+          className={`absolute top-30 right-[400px] w-24 h-24 animate-blob ${glassBlob}`}
         />
         <div
-          className={`absolute bottom-20 right-[300px] w-32 h-32 ${glassBlob}`}
+          className={`absolute bottom-20 right-[300px] w-32 h-32 animate-blob ${glassBlob}`}
         />
       </div>
  <Navbar activeMenu={activeMenu} />
@@ -96,8 +96,7 @@ const DashboardLayout = ({ children, activeMenu }) => {
           {/* GLASS CARD */}
          
           <div className={styles.glassCard}>
-            {/* NAVBAR INSIDE GLASS */}
-            
+                   
 
             {/* DASHBOARD BODY */}
             <div className="flex w-full gap-6 ">
@@ -108,7 +107,7 @@ const DashboardLayout = ({ children, activeMenu }) => {
               </div>
 
               {/* Main Content */}
-              <div className="grow overflow-y-auto">{children}</div>
+              <div className="grow overflow-y-auto ps-6">{children}</div>
             </div>
           </div>
         </div>
