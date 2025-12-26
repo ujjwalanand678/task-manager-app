@@ -58,15 +58,15 @@ const styles = {
   `,
 
   title: `
-    text-[30px]
+    text-[28px]
     font-semibold
-    text-white/85
+    text-white/90
     tracking-tight
   `,
 
   subtitle: `
       text-[16px]
-  text-white/85
+  text-white/90
    font-medium
   `,
 };

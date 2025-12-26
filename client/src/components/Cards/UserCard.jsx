@@ -1,8 +1,22 @@
 import React from "react";
+const styles = {
 
+
+  glassCard: `
+  relative z-1
+  backdrop-blur-lg
+  bg-white/5
+  w-full 
+  rounded-3xl
+  p-6
+  border border-white/10
+  shadow-[0_30px_120px_rgba(0,0,0,0.45)]
+`,
+
+};
 const UserCard = ({ userInfo }) => {
   return (
-    <div className="user-card p-2">
+    <div className={styles.glassCard }>
       <div className="flex items-center justify-between">
         <div className="flex items-center gap-3">
           <img
@@ -12,13 +26,13 @@ const UserCard = ({ userInfo }) => {
           />
 
           <div>
-            <p className="text-sm font-medium">{userInfo?.name}</p>
-            <p className="text-xs text-gray-500">{userInfo?.email}</p>
+            <p className="text-[15px] font-medium text-white">{userInfo?.name}</p>
+            <p className="text-xs text-white">{userInfo?.email}</p>
           </div>
         </div>
       </div>
 
-      <div className="flex items-end gap-3 mt-5">
+      <div className="flex  items-end gap-2 mt-5">
         <StatCard
           label="Pending"
           count={userInfo?.pendingTasks || 0}
@@ -59,7 +73,7 @@ const StatCard = ({ label, count, status }) => {
 
   return (
     <div
-      className={`flex-1 text-[10px] font-medium ${getStatusTagColor()} px-4 py-0.5 rounded`}
+      className={`flex-1 text-[12px] font-medium ${getStatusTagColor()} px-2 py-0.5 rounded`}
     >
       <span className="text-[12px] font-semibold">{count}</span>
       <br />

@@ -6,6 +6,23 @@ import { LuFileSpreadsheet } from "react-icons/lu";
 import UserCard from "../../components/Cards/UserCard";
 import toast from "react-hot-toast";
 
+const styles = {
+  downloadBtn: `
+ mr-8
+
+    cursor-pointer
+    flex items-center gap-2
+    px-3 py-2
+    rounded-md
+    text-sm font-medium
+    text-white
+    bg-white/15
+    border border-white/20
+    backdrop-blur-md
+    transition-all
+    hover:bg-white/25
+    hover:border-white/30
+    hover:shadow-[0_4px_20px_rgba(255,255,255,0.3)]`,}
 const ManageUsers = () => {
   const [allUsers, setAllUsers] = useState([]);
 
@@ -63,12 +80,12 @@ const handleDownloadReport = async () => {
     <DashboardLayout activeMenu="Team Members">
       <div className="mt-5 mb-10">
         <div className="flex md:flex-row md:items-center justify-between">
-          <h2 className="text-xl md:text-xl font-medium">
+          <h2 className="text-xl md:text-xl font-medium text-white/90">
             Team Members
           </h2>
 
           <button
-            className="flex md:flex download-btn"
+            className={ styles.downloadBtn }
             onClick={handleDownloadReport}
           >
             <LuFileSpreadsheet className="text-lg" />

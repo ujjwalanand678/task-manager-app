@@ -80,7 +80,38 @@ const CreateTask = () => {
   };
 
   // Update Task
-  const updateTask = async () => {};
+  const updateTask = async () => {
+    setLoading(true);
+
+    try {
+      const todolist = taskData.todoChecklist?.map((item) => {
+        const prevTodoChecklist = currentTask?.todoChecklist || [];
+        const matchedTask = prevTodoChecklist.find(
+          (task) => task.text === item
+        );
+
+        return {
+          text: item,
+          completed: matchedTask ? matchedTask.completed : false,
+        };
+      });
+
+      const response = await axiosInstance.put(
+        API_PATHS.TASKS.UPDATE_TASK(taskId),
+        {
+          ...taskData,
+          dueDate: new Date(taskData.dueDate).toISOString(),
+          todoChecklist: todolist,
+        }
+      );
+
+      toast.success("Task Updated Successfully");
+    } catch (error) {
+      console.error("Error creating task:", error);
+    } finally {
+      setLoading(false);
+    }
+  };
 
   const handleSubmit = async () => {
     setError(null);
@@ -279,11 +310,12 @@ const CreateTask = () => {
                 <input
                   className="
         mt-1 w-full
-        bg-white/10
-        border border-white/20
+        bg-black/10
+        border border-black/20
         rounded-md
         px-3 py-2
-        text-white
+        text-black  
+        
         focus:outline-none
         focus:border-white/40
       "
@@ -292,6 +324,7 @@ const CreateTask = () => {
                     handleValueChange("dueDate", target.value)
                   }
                   type="date"
+                  style={{ filter: "invert(1)" }}
                 />
               </div>
 

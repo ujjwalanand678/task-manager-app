@@ -70,11 +70,11 @@ const TaskCard = ({
             : "border-violet-500"
         }`}
       >
-        <p className="text-sm font-medium text-white/90 mt-4 line-clamp-2">
+        <p className="text-sm font-medium text-white/90 mt-4 line-clamp-1 ">
           {title}
         </p>
 
-        <p className="text-xs text-white/90 mt-1.5 line-clamp-2 leading-[18px]">
+        <p className="text-xs text-white/90 mt-2 line-clamp-2 leading-[18px]">
           {description}
         </p>
 
@@ -112,8 +112,8 @@ const TaskCard = ({
         <AvatarGroup avatars={assignedTo || []} />
 
         {attachmentCount > 0 && (
-          <div className="flex items-center gap-2 bg-blue-50 px-2.5 py-1.5 rounded-lg">
-            <LuPaperclip className="text-primary" />
+          <div className="flex items-center gap-2 bg-white/10 text-white px-2.5 py-1.5 rounded-lg">
+            <LuPaperclip className="text-white" />
             <span className="text-xs text-white/90 font-medium">
               {attachmentCount}
             </span>

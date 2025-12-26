@@ -45,10 +45,8 @@ mt-3
   /* Interactions */
   transition-all duration-300 ease-out
   hover:bg-gradient-to-br
-  hover:from-black/90
-    hover:via-black/10
-    hover:to-black/10
-    hover:text-[#ffffff]/90
+hover:from-white/100 hover:via-white/60 hover:to-white/40
+    hover:text-black/95
   hover:scale-[1.02] 
   hover:shadow-[0px_4px_18px_rgba(255,255,255,0.8)]
   active:scale-[0.98]
@@ -61,12 +59,9 @@ mt-3
   `,
 
   footerLink: `
-  cursor-pointer
-    ml-1
-    text-[14px]
-    font-medium
-    text-[#ffffff]
-    underline
+  ml-1 text-[14px] font-semibold cursor-pointer
+  text-sky-500 transition-colors duration-200
+  hover:text-sky-400 hover:underline
   `,
 };
 

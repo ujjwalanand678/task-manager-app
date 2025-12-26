@@ -17,9 +17,9 @@ const styles = {
   `,
 
   title: `
-      text-[30px]
+      text-[28px]
     font-semibold
-    text-white/85
+    text-white/90
     tracking-tight
   `,
 
@@ -59,10 +59,9 @@ const styles = {
   /* Interactions */
   transition-all duration-300 ease-out
   hover:bg-gradient-to-br
-  hover:from-black/90
-    hover:via-black/10
-    hover:to-black/10
-    hover:text-[#ffffff]/90
+  hover:bg-gradient-to-br
+hover:from-white/100 hover:via-white/60 hover:to-white/40
+    hover:text-black/95
   hover:scale-[1.02] 
   hover:shadow-[0px_5px_20px_rgba(255,255,255,0.8)]
   active:scale-[0.98]
@@ -75,12 +74,9 @@ const styles = {
   `,
 
   footerLink: `
-      cursor-pointer
-    ml-1
-    text-[15px]
-    font-medium
-    text-[#ffffff]
-    underline
+  ml-1 text-[14px] font-semibold cursor-pointer
+  text-sky-500 transition-colors duration-200
+  hover:text-sky-400 hover:underline
   `,
 
   apiError: `text-center text-xs text-rose-600 font-semibold mb-4 bg-rose-50/50 py-2 rounded-lg`,
