@@ -16,16 +16,15 @@ import Model from "../../components/Model.jsx";
 
 const CreateTask = () => {
   const location = useLocation();
-  const { taskId } = location.state || {};
   const navigate = useNavigate();
-
+  const [taskId, setTaskId] = useState(() => location.state?.taskId || "");
   const [taskData, setTaskData] = useState({
     title: "",
     description: "",
     priority: "Low",
-    dueDate: null,
+    dueDate: "",
     assignedTo: [],
-    todoChecklist: [],
+    todoCheckList: [],
     attachments: [],
   });
 
@@ -46,9 +45,9 @@ const CreateTask = () => {
       title: "",
       description: "",
       priority: "Low",
-      dueDate: null,
+      dueDate: "",
       assignedTo: [],
-      todoChecklist: [],
+      todoCheckList: [],
       attachments: [],
     });
   };
@@ -58,16 +57,21 @@ const CreateTask = () => {
     setLoading(true);
 
     try {
-      const todoList = taskData.todoChecklist?.map((item) => ({
-        text: item,
-        completed: false,
-      }));
+      const todolist = (taskData.todoCheckList || []).map((item) =>
+        typeof item === "string"
+          ? { text: item, completed: false }
+          : // assume it's already an object with text/completed
+            { text: item.text ?? "", completed: !!item.completed }
+      );
 
-      const response = await axiosInstance.post(API_PATHS.TASKS.CREATE_TASK, {
+      
+      const payload = {
         ...taskData,
         dueDate: new Date(taskData.dueDate).toISOString(),
-        todoChecklist: todoList,
-      });
+        todoCheckList: todolist,
+      };
+      console.log("Creating task payload:", payload);
+      await axiosInstance.post(API_PATHS.TASKS.CREATE_TASK, payload);
 
       toast.success("Task Created Successfully");
       clearData();
@@ -84,9 +88,9 @@ const CreateTask = () => {
     setLoading(true);
 
     try {
-      const todolist = taskData.todoChecklist?.map((item) => {
-        const prevTodoChecklist = currentTask?.todoChecklist || [];
-        const matchedTask = prevTodoChecklist.find(
+      const todolist = taskData.todoCheckList?.map((item) => {
+        const prevTodoCheckList = currentTask?.todoCheckList || [];
+        const matchedTask = prevTodoCheckList.find(
           (task) => task.text === item
         );
 
@@ -96,14 +100,11 @@ const CreateTask = () => {
         };
       });
 
-      const response = await axiosInstance.put(
-        API_PATHS.TASKS.UPDATE_TASK(taskId),
-        {
-          ...taskData,
-          dueDate: new Date(taskData.dueDate).toISOString(),
-          todoChecklist: todolist,
-        }
-      );
+      await axiosInstance.put(API_PATHS.TASKS.UPDATE_TASK(taskId), {
+        ...taskData,
+        dueDate: new Date(taskData.dueDate).toISOString(),
+        todoCheckList: todolist,
+      });
 
       toast.success("Task Updated Successfully");
     } catch (error) {
@@ -137,7 +138,7 @@ const CreateTask = () => {
       return;
     }
 
-    if (taskData.todoChecklist?.length === 0) {
+    if (taskData.todoCheckList?.length === 0) {
       setError("Add atleast one todo task");
       return;
     }
@@ -157,25 +158,31 @@ const CreateTask = () => {
         API_PATHS.TASKS.GET_TASK_BY_ID(taskId)
       );
 
-      if (response.data) {
-        const taskInfo = response.data;
-        setCurrentTask(taskInfo);
+      const taskInfo = response.data.task;
 
-        setTaskData((prevState) => ({
-          title: taskInfo.title,
-          description: taskInfo.description,
-          priority: taskInfo.priority,
-          dueDate: taskInfo.dueDate
-            ? moment(taskInfo.dueDate).format("YYYY-MM-DD")
-            : null,
-          assignedTo: taskInfo?.assignedTo?.map((item) => item?._id) || [],
-          todoChecklist:
-            taskInfo?.todoChecklist?.map((item) => item?.text) || [],
-          attachments: taskInfo?.attachments || [],
-        }));
+      if (!taskInfo) {
+        toast.error("Task not found");
+        navigate("/admin/tasks");
+        return;
       }
+
+      setCurrentTask(taskInfo);
+
+      setTaskData({
+        title: taskInfo.title || "",
+        description: taskInfo.description || "",
+        priority: taskInfo.priority || "Low",
+        dueDate: taskInfo.dueDate
+          ? moment(taskInfo.dueDate).format("YYYY-MM-DD")
+          : null,
+        assignedTo: taskInfo.assignedTo?.map((u) => u._id) || [],
+        todoCheckList: taskInfo.todoCheckList?.map((t) => t.text) || [],
+        attachments: taskInfo.attachments || [],
+      });
     } catch (error) {
-      console.error("Error fetching users:", error);
+      console.error("Error fetching task:", error);
+      toast.error("Failed to fetch task");
+      navigate("/admin/tasks");
     }
   };
 
@@ -200,7 +207,6 @@ const CreateTask = () => {
     if (taskId) {
       getTaskDetailsByID(taskId);
     }
-
     return () => {};
   }, [taskId]);
 
@@ -345,13 +351,13 @@ const CreateTask = () => {
 
             <div className="mt-3">
               <label className="text-sm font-medium text-white/90">
-                TODO Checklist
+                TO DO Checklist
               </label>
 
               <TodoListInput
-                todoList={taskData?.todoChecklist}
+                todoList={taskData?.todoCheckList}
                 setTodoList={(value) =>
-                  handleValueChange("todoChecklist", value)
+                  handleValueChange("todoCheckList", value)
                 }
               />
             </div>

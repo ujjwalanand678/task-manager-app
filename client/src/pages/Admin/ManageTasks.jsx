@@ -61,7 +61,7 @@ const ManageTasks = () => {
   };
 
   const handleClick = (taskData) => {
-    navigate(`/admin/tasks/edit/${taskData._id}`, {
+    navigate("/admin/create-task", {
       state: { taskId: taskData._id },
     });
   };
@@ -156,7 +156,7 @@ const ManageTasks = () => {
               assignedTo={item.assignedTo?.map((item) => item.profileImageUrl)}
               attachmentCount={item.attachments?.length || 0}
               completedTodoCount={item.completedTodoCount || 0}
-              todoChecklist={item.todoChecklist || []}
+              todoCheckList={item.todoCheckList || []}
               onClick={() => {
                 handleClick(item);
               }}

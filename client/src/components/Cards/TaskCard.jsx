@@ -15,7 +15,7 @@ const TaskCard = ({
   assignedTo,
   attachmentCount,
   completedTodoCount,
-  todoChecklist,
+  todoCheckList,
   onClick,
 }) => {
   const getStatusTagColor = () => {
@@ -81,7 +81,7 @@ const TaskCard = ({
         <p className="text-[13px] text-white/90 font-medium mt-2 mb-2">
           Task Done:{" "}
           <span className="font-semibold text-white/90">
-            {completedTodoCount} / {todoChecklist.length || 0}
+            {completedTodoCount} / {todoCheckList.length || 0}
           </span>
         </p>
 

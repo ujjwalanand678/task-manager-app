@@ -26,8 +26,9 @@ export const createTask = async (req, res) => {
       dueDate,
       assignedTo,
       createdBy: req.user._id,
-      todoCheckList,
       attachments,
+      todoCheckList,
+      
     });
 
     res
@@ -69,7 +70,7 @@ export const getTasks = async (req, res) => {
     // Add completed todoChecklist count to each task
     tasks = await Promise.all(
       tasks.map(async (task) => {
-        const completedCount = task.todoChecklist.filter(
+        const completedCount = task.todoCheckList.filter(
           (item) => item.completed
         ).length;
         return { ...task._doc, completedTodoCount: completedCount };
@@ -163,7 +164,7 @@ export const updateTask = async (req, res) => {
     task.description = req.body.description || task.description;
     task.priority = req.body.priority || task.priority;
     task.dueDate = req.body.dueDate || task.dueDate;
-    task.todoChecklist = req.body.todoChecklist || task.todoChecklist;
+    task.todoCheckList = req.body.todoCheckList || task.todoCheckList;
     task.attachments = req.body.attachments || task.attachments;
 
     // Handle assignedTo safely
@@ -251,7 +252,7 @@ export const updateTaskStatus = async (req, res) => {
 
     // If marked completed → auto-finish checklist + progress
     if (task.status === "Completed") {
-      task.todoChecklist.forEach((item) => (item.completed = true));
+      task.todoCheckList.forEach((item) => (item.completed = true));
       task.progress = 100;
     }
 
@@ -275,7 +276,7 @@ export const updateTaskStatus = async (req, res) => {
 
 export const updateTaskChecklist = async (req, res) => {
   try {
-    const { todoChecklist } = req.body;
+    const { todoCheckList } = req.body;
     const task = await Task.findById(req.params.id);
 
     if (!task) {
@@ -293,15 +294,14 @@ export const updateTaskChecklist = async (req, res) => {
     }
 
     // Replace checklist with updated one
-    task.todoChecklist = todoChecklist;
+    task.todoCheckList = todoCheckList;
 
     // Auto-update progress based on checklist completion
-    const completedCount = task.todoChecklist.filter(
+    const completedCount = task.todoCheckList.filter(
       (item) => item.completed
     ).length;
 
-    const totalItems = task.todoChecklist.length;
-
+    const totalItems = task.todoCheckList.length;
     task.progress =
       totalItems > 0
         ? Math.round((completedCount / totalItems) * 100)

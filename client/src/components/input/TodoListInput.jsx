@@ -40,15 +40,12 @@ const TodoListInput = ({ todoList, setTodoList }) => {
         >
           <p className="text-[15px] text-white">
             <span className="text-sm text-white font-semibold mr-2">
-              {index < 9 ? `0${index + 1}` : index + 1}{" )"}
+              {index < 9 ? `0${index + 1}` : index + 1}{" "}
             </span>
             {item}
           </p>
 
-          <button
-          
-            onClick={() => handleDeleteOption(index)}
-          >
+          <button type="button"onClick={() => handleDeleteOption(index)}>
             <HiOutlineTrash className="text-lg text-red-500 cursor-pointer  hover:drop-shadow-[0_0_10px_rgba(255,0,0,1)] " />
           </button>
         </div>
@@ -63,10 +60,7 @@ const TodoListInput = ({ todoList, setTodoList }) => {
           className="w-full bg-white/10 text-[13px] text-white/90 outline-none placeholder:text-white/80 border border-white    rounded px-3 py-2"
         />
 
-        <button
-               className={styles.cardBtn} 
-          onClick={handleAddOption}
-        >
+        <button type="button" className={styles.cardBtn} onClick={handleAddOption}>
           <HiMiniPlus className="text-lg" />
           Add
         </button>

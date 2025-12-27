@@ -44,18 +44,14 @@ const AddAttachmentsInput = ({ attachments, setAttachments }) => {
             <p className="text-[15px] text-white">{item}</p>
           </div>
 
-          <button
-           
-            onClick={() => handleDeleteOption(index)}
-          >
-             <HiOutlineTrash className="text-lg text-red-500 cursor-pointer  hover:drop-shadow-[0_0_10px_rgba(255,0,0,1)] " />
+          <button onClick={() => handleDeleteOption(index)}>
+            <HiOutlineTrash className="text-lg text-red-500 cursor-pointer  hover:drop-shadow-[0_0_10px_rgba(255,0,0,1)] " />
           </button>
         </div>
       ))}
 
       <div className="flex items-center gap-5 mt-4">
         <div className="flex-1 flex items-center gap-3 bg-white/10 border border-gray-100 rounded px-3 py-2">
-         
           <input
             type="text"
             placeholder="Add File Link"
@@ -63,13 +59,10 @@ const AddAttachmentsInput = ({ attachments, setAttachments }) => {
             onChange={({ target }) => setOption(target.value)}
             className="w-full text-[13px] text-white/90 outline-none  placeholder:text-white/80 "
           />
-           <LuPaperclip className="text-white" />
+          <LuPaperclip className="text-white" />
         </div>
 
-        <button
-          className={styles.cardBtn} 
-          onClick={handleAddOption}
-        >
+        <button className={styles.cardBtn} onClick={handleAddOption}>
           <HiMiniPlus className="text-lg" />
           Add
         </button>

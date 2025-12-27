@@ -39,26 +39,25 @@ const ViewTaskDetails = () => {
 
   // handle todo check
   const updateTodoChecklist = async (index) => {
-    const todoChecklist = [...task?.todoChecklist];
+    const todoCheckList = [...task?.todoCheckList];
     const taskId = id;
 
-    if (todoChecklist && todoChecklist[index]) {
-      todoChecklist[index].completed = !todoChecklist[index].completed;
-
+    if (todoCheckList && todoCheckList[index]) {
+      todoCheckList[index].completed = !todoCheckList[index].completed;
       try {
         const response = await axiosInstance.put(
           API_PATHS.TASKS.UPDATE_TODO_CHECKLIST(taskId),
-          { todoChecklist }
+          { todoCheckList }
         );
 
         if (response.status === 200) {
           setTask(response.data?.task || task);
         } else {
           // Optionally revert the toggle if the API call fails
-          todoChecklist[index].completed = !todoChecklist[index].completed;
+          todoCheckList[index].completed = !todoCheckList[index].completed;
         }
       } catch (error) {
-        todoChecklist[index].completed = !todoChecklist[index].completed;
+        todoCheckList[index].completed = !todoCheckList[index].completed;
       }
     }
   };
@@ -138,7 +137,7 @@ const ViewTaskDetails = () => {
                   Todo Checklist
                 </label>
 
-                {task?.todoChecklist?.map((item, index) => (
+                {task?.todoCheckList?.map((item, index) => (
                   <TodoCheckList
                     key={`todo_${index}`}
                     text={item.text}

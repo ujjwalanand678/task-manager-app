@@ -123,7 +123,7 @@ const MyTasks = () => {
               )}
               attachmentCount={item.attachments?.length || 0}
               completedTodoCount={item.completedTodoCount || 0}
-              todoChecklist={item.todoChecklist || []}
+              todoCheckList={item.todoCheckList || []}
               onClick={() => handleClick(item._id)}
             />
           ))}
