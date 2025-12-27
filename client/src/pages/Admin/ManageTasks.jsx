@@ -90,7 +90,7 @@ const ManageTasks = () => {
 
   useEffect(() => {
     getAllTasks(filterStatus);
-    return () => { };
+    return () => {};
   }, [filterStatus]);
 
   return (
@@ -133,7 +133,6 @@ const ManageTasks = () => {
   hover:border-white/30
   hover:shadow-[0_4px_20px_rgba(255,255,255,0.3)]
 "
-
               onClick={handleDownloadReport}
             >
               <LuFileSpreadsheet className="text-lg" />

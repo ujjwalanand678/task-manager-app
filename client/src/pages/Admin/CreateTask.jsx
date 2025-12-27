@@ -70,7 +70,7 @@ const CreateTask = () => {
         dueDate: new Date(taskData.dueDate).toISOString(),
         todoCheckList: todolist,
       };
-      console.log("Creating task payload:", payload);
+      // console.log("Creating task payload:", payload);
       await axiosInstance.post(API_PATHS.TASKS.CREATE_TASK, payload);
 
       toast.success("Task Created Successfully");

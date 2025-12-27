@@ -8,6 +8,25 @@ import TaskStatusTabs from "../../components/TaskStatusTabs.jsx";
 import TaskCard from "../../components/Cards/TaskCard.jsx";
 import toast from "react-hot-toast";
 
+const styles = {
+  downloadBtn: `
+ mr-8
+   
+    cursor-pointer
+    flex items-center justify-center gap-2
+    px-3 py-2
+    rounded-md
+    text-sm font-medium
+    text-white
+    bg-white/15
+    border border-white/20
+    backdrop-blur-md
+    transition-all
+    hover:bg-white/25
+    hover:border-white/30
+    hover:shadow-[0_4px_20px_rgba(255,255,255,0.3)]`,
+};
+
 const MyTasks = () => {
   const [allTasks, setAllTasks] = useState([]);
   const [tabs, setTabs] = useState([]);
@@ -84,12 +103,12 @@ const MyTasks = () => {
     <DashboardLayout activeMenu="My Tasks">
       <div className="my-5">
         <div className="flex flex-col md:flex-row md:items-center justify-between gap-3">
-          <h2 className="text-xl md:text-xl font-medium">
+          <h2 className="text-2xl md:text-2xl font-medium text-white/90">
             My Tasks
           </h2>
 
           <button
-            className="flex items-center gap-2 download-btn"
+            className={styles.downloadBtn}
             onClick={handleDownloadReport}
           >
             <LuFileSpreadsheet className="text-lg" />
@@ -98,12 +117,13 @@ const MyTasks = () => {
         </div>
 
         {tabs?.[0]?.count > 0 && (
-          <div className="flex items-center gap-3 mt-4">
+          <div className="flex items-center gap-3 mt-4 justify-between">
             <TaskStatusTabs
               tabs={tabs}
               activeTab={filterStatus}
               setActiveTab={setFilterStatus}
             />
+            
           </div>
         )}
 
