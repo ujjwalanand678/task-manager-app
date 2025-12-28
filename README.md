@@ -1,24 +1,29 @@
-# 🧠 ask Manager SaaS App
+# Task Manager SaaS App
 
-A modern, full-stack Task Management SaaS application built with the MERN stack and designed for productivity, collaboration, and delightful UX. The app includes a fully functional dashboard for tracking tasks, analytics, and user activity — scalable for real SaaS usage with authentication, role-based features, and subscription-ready structure.
+A production-ready Task Management SaaS application built using the MERN stack, focused on productivity, collaboration, and clean user experience.
+The platform features role-based access, interactive dashboards, task analytics, and scalable architecture suitable for real-world SaaS use cases.
 
-# ✨ Features
-User Authentication (JWT + Bcrypt)
-Secure signup & login flow with encrypted passwords and protected routes.
+## Overview
+This application helps teams and individuals efficiently manage tasks, monitor progress, and analyze workload through intuitive dashboards.
+It is designed with scalability, security, and usability as core principles, reflecting real business workflows rather than demo-only functionality.
 
-Dashboard Overview
-Visual summary of total tasks, completed tasks, pending tasks, and daily activity.
+## Features
+- JWT-based authentication & role-based authorization
+- Task creation, assignment, and tracking (Admin & Member)
+- Sub-task checklist with auto progress calculation
+- Admin & user dashboards with analytics
+- Exportable Excel reports
+- Fully responsive design for mobile and desktop
+- Modern glassmorphism UI built with Tailwind CSS
 
-Create, Edit & Delete Tasks
-Each user can manage their own tasks independently.
+## Tech Stack
+Frontend: React, Tailwind CSS  
+Backend: Node.js, Express.js  
+Database: MongoDB  
+Cloud & Utilities: Cloudinary (image storage), ExcelJS (report export) 
 
-Task Categories & Filters
-Organize tasks by status, priority, or custom tags.
-
-Real-Time UI Updates
-Smooth UX using React state management + API integration.
-
-Responsive, Modern UI
-Built with Tailwind CSS + a clean dashboard layout.
+## Author
+Ujjwal Anand
+Full-Stack Developer | MERN stack Developer | UI/UX Designer
 
 
