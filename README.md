@@ -24,6 +24,9 @@ It is designed with scalability, security, and usability as core principles, ref
 ### Create Task
 ![createTask](./screenshots/createTask.png)
 
+### Team Members
+![teamMembers](./screenshots/teamMembers.png)
+
 ## Features
 - JWT-based authentication & role-based authorization
 - Task creation, assignment, and tracking (Admin & Member)
