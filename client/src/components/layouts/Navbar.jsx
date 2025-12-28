@@ -22,7 +22,7 @@ const Navbar = ({ activeMenu }) => {
       >
         {/* Mobile menu toggle */}
         <button
-          className="block lg:hidden text-white/85 hover:text-white transition"
+          className="block lg:hidden text-white/95 hover:text-white transition"
           onClick={() => setOpenSideMenu(!openSideMenu)}
         >
           {openSideMenu ? (
@@ -33,7 +33,7 @@ const Navbar = ({ activeMenu }) => {
         </button>
 
         {/* Title */}
-        <h2 className="text-xl font-medium text-white/90">
+        <h2 className="text-xl font-medium text-white/95">
           Task Manager
         </h2>
       </div>
@@ -43,7 +43,7 @@ const Navbar = ({ activeMenu }) => {
         <>
           {/* Overlay */}
           <div
-            className="fixed inset-0 bg-black/40 z-[9998]"
+            className="fixed inset-0 bg-black/80 z-[9998]"
             onClick={() => setOpenSideMenu(false)}
           />
 

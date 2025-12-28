@@ -23,7 +23,7 @@ const MyTasks = () => {
           status: status === "All" ? "" : status,
         },
       });
-  console.log(response.data);
+ 
       setAllTasks(response.data?.tasks?.length > 0 ? response.data.tasks : []);
 
       const statusSummary = response.data?.statusSummary || {};
@@ -52,7 +52,7 @@ const MyTasks = () => {
 
   return (
     <DashboardLayout activeMenu="My Tasks">
-      <div className="my-5">
+      <div className="my-5 me-6">
         <div className="flex flex-col md:flex-row md:items-center justify-between gap-3">
           <h2 className="text-2xl md:text-2xl font-medium text-white/90">
             My Tasks
@@ -70,7 +70,7 @@ const MyTasks = () => {
         <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mt-4">
           {allTasks?.map((item) => (
             <TaskCard
-              key={item.id}
+              key={item._id}
               title={item.title}
               description={item.description}
               priority={item.priority}
@@ -82,7 +82,7 @@ const MyTasks = () => {
               attachmentCount={item.attachments?.length || 0}
               completedTodoCount={item.completedTodoCount || 0}
               todoCheckList={item.todoCheckList || []}
-              onClick={() => handleClick(item.id)}
+              onClick={() => handleClick(item._id)}
             />
           ))}
         </div>

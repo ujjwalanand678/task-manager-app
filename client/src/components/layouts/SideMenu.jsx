@@ -11,7 +11,7 @@ const styles = {
   backdrop-blur-lg
   bg-white/5
 
-  border-r border-white/10
+  border-r border-white/20
 
   rounded-l-3xl
   rounded-r-none
@@ -51,16 +51,26 @@ const SideMenu = ({ activeMenu }) => {
   return (
     <div className={styles.sideMenuGlassCard}>
       <div className="flex flex-col items-center justify-center mb-7 pt-5">
-        <div className="relative">
-          <img
-            src={user?.profileImageUrl || ""}
-            alt="Profile Image"
-            className="w-20 h-20 bg-slate-400 rounded-full"
-          />
-        </div>
+      <div className="relative">
+  <img
+    src={user?.profileImageUrl || undefined}
+    alt="Profile Image"
+    className="
+      w-20 h-20
+      rounded-full
+      border border-white/20
+      bg-white/20
+      object-cover
+
+      flex items-center justify-center
+      text-white text-xs font-medium text-center
+    "
+  />
+</div>
+
 
         {user?.role === "admin" && (
-          <div className="text-[10px] font-medium text-white bg-primary px-3 py-0.5 rounded mt-1">
+          <div className="text-[14px] font-medium text-white bg-primary px-3 py-0.5 rounded mt-1">
             Admin
           </div>
         )}
@@ -70,7 +80,7 @@ const SideMenu = ({ activeMenu }) => {
           {/* Changed from gray-950 */}
           {user?.name || ""}
         </h5>
-        <p className="text-white/50 text-[12px]">
+        <p className="text-white/80 text-[12px]">
           {" "}
           {/* Changed from gray-500 */}
           {user?.email || ""}
@@ -81,10 +91,10 @@ const SideMenu = ({ activeMenu }) => {
         {sideMenuData.map((item, index) => (
           <button
             key={`menu_${index}`}
-            className={`w-full flex items-center gap-4 text-[15px] transition-colors ${
+            className={`w-full flex items-center font-medium gap-4 text-[17px] transition-colors ${
               activeMenu === item.label
-                ? "text-blue-400 bg-white/10 border-r-2 border-blue-400" // Improved visibility for dark mode
-                : "text-white/60 hover:text-white hover:bg-white/5"
+                ? "text-cyan-300 bg-white/10 border-r-2 border-cyan-300" // Improved visibility for dark mode
+                : "text-white/80 hover:text-white hover:bg-white/5"
             } py-3 px-6 mb-3 cursor-pointer`}
             onClick={() => handleClick(item.path)}
           >

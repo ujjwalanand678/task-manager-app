@@ -8,7 +8,7 @@ const TaskStatusTabs = ({ tabs, activeTab, setActiveTab }) => {
           key={tab.label}
           onClick={() => setActiveTab(tab.label)}
           className={`
-            relative px-4 py-2 text-sm rounded-lg transition-all
+            relative px-4 py-2 text-sm rounded-lg transition-all cursor-pointer
             ${activeTab === tab.label
               ? "text-white bg-white/10"
               : "text-white/60 hover:text-white"}

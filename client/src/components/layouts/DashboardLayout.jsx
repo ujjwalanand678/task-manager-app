@@ -15,7 +15,7 @@ backdrop-saturate-150
 
 const styles = {
   root: `
-  relative min-h-screen w-full
+  relative min-h-screen w-full 
   overflow-hidden
 z-0
 p-5

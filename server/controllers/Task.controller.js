@@ -44,11 +44,11 @@ export const createTask = async (req, res) => {
 };
 
 export const getTasks = async (req, res) => {
-  console.log("USER FROM TOKEN:", {
-  id: req.user._id,
-  role: req.user.role,
-  type: typeof req.user._id,
-});
+//   console.log("USER FROM TOKEN:", {
+//   id: req.user._id,
+//   role: req.user.role,
+//   type: typeof req.user._id,
+// });
 
   // Fetch tasks based on user role and optional status filter
   try {

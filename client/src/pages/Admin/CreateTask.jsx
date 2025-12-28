@@ -235,7 +235,7 @@ const CreateTask = () => {
 
               {taskId && (
                 <button
-                  className="flex items-center gap-1.5 text-[13px] font-medium text-red-400 hover:text-red-300 transition-colors"
+                  className="flex cursor-pointer bg-red-50 px-2 py-1 rounded items-center gap-1 text-[13px] font-medium text-red-500 hover:text-red-600 transition-colors"
                   onClick={() => setOpenDeleteAlert(true)}
                 >
                   <LuTrash2 /> Delete
