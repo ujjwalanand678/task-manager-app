@@ -5,10 +5,10 @@ import {  getUserById, getUsers } from "../controllers/User.controller.js";
 const route = express.Router();
 
 // User Management Routes
-//http://localhost:3000/api/users
+//http://localhost:8000/api/users
 route.get("/", authorize, adminOnly, getUsers); 
 
-//http://localhost:3000/api/users/:id
+//http://localhost:8000/api/users/:id
 route.get("/:id", authorize, getUserById);  
 
     

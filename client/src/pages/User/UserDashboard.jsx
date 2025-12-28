@@ -52,6 +52,7 @@ const UserDashboard = () => {
         setDashboardData(response.data);
         prepareChartData(response.data?.charts || null);
       }
+    
     } catch (error) {
       console.error("Error fetching users:", error);
     }
@@ -63,6 +64,7 @@ const UserDashboard = () => {
 
   useEffect(() => {
     getDashboardData();
+     return () => {};
   }, []);
 
   return (

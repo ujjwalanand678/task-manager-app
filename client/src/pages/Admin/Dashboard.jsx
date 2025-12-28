@@ -57,12 +57,14 @@ const Dashboard = () => {
         setDashboardData(response.data);
         prepareChartData(response.data?.charts || null);
       }
+      console.log(response.data.charts.taskDistribution);
+
     } catch (error) {
       console.error("Error fetching users:", error);
     }
   };
   const onSeeMore = () => {
-    navigate("/admin/tasks");
+    navigate("/user/tasks");
   };
   useEffect(() => {
     getDashboardData();

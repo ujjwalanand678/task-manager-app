@@ -1,5 +1,5 @@
 import mongoose from "mongoose";
-
+import User from "./User.model.js";
 const todoSchema = new mongoose.Schema({
   text: { type: String, required: true },
   completed: { type: Boolean, default: false },

@@ -47,7 +47,7 @@ export const authorize = async (req, res, next) => {
     }
     // Attach full user object (cleaner & more powerful)
     req.user = {
-      id: user._id,
+      _id: user._id,
       role: user.role,
       name: user.name,
       email: user.email,

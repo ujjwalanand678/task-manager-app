@@ -1,4 +1,6 @@
 import Task from "../models/Task.model.js";
+import mongoose from "mongoose";
+
 
 export const createTask = async (req, res) => {
   try {
@@ -42,6 +44,12 @@ export const createTask = async (req, res) => {
 };
 
 export const getTasks = async (req, res) => {
+  console.log("USER FROM TOKEN:", {
+  id: req.user._id,
+  role: req.user.role,
+  type: typeof req.user._id,
+});
+
   // Fetch tasks based on user role and optional status filter
   try {
     const { status } = req.query;
@@ -63,7 +71,7 @@ export const getTasks = async (req, res) => {
       // Normal user sees only tasks assigned to them
       tasks = await Task.find({
         ...filter,
-        assignedTo: req.user._id,
+        assignedTo: { $in: [req.user._id] }
       }).populate("assignedTo", "name email profileImageUrl");
     }
 

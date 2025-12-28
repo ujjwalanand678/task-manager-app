@@ -30,7 +30,7 @@ const ViewTaskDetails = () => {
       );
 
       if (response.data) {
-        setTask(response.data);
+        setTask(response.data.task);
       }
     } catch (error) {
       console.error("Error fetching users:", error);

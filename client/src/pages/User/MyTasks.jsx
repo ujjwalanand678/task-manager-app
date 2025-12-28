@@ -6,26 +6,8 @@ import { API_PATHS } from "../../utils/apiPath.js";
 import { LuFileSpreadsheet } from "react-icons/lu";
 import TaskStatusTabs from "../../components/TaskStatusTabs.jsx";
 import TaskCard from "../../components/Cards/TaskCard.jsx";
-import toast from "react-hot-toast";
 
-const styles = {
-  downloadBtn: `
- mr-8
-   
-    cursor-pointer
-    flex items-center justify-center gap-2
-    px-3 py-2
-    rounded-md
-    text-sm font-medium
-    text-white
-    bg-white/15
-    border border-white/20
-    backdrop-blur-md
-    transition-all
-    hover:bg-white/25
-    hover:border-white/30
-    hover:shadow-[0_4px_20px_rgba(255,255,255,0.3)]`,
-};
+
 
 const MyTasks = () => {
   const [allTasks, setAllTasks] = useState([]);
@@ -36,18 +18,13 @@ const MyTasks = () => {
 
   const getAllTasks = async (status) => {
     try {
-      const response = await axiosInstance.get(
-        API_PATHS.TASKS.GET_ALL_TASKS,
-        {
-          params: {
-            status: status === "All" ? "" : status,
-          },
-        }
-      );
-
-      setAllTasks(
-        response.data?.tasks?.length > 0 ? response.data.tasks : []
-      );
+      const response = await axiosInstance.get(API_PATHS.TASKS.GET_ALL_TASKS, {
+        params: {
+          status: status === "All" ? "" : status,
+        },
+      });
+  console.log(response.data);
+      setAllTasks(response.data?.tasks?.length > 0 ? response.data.tasks : []);
 
       const statusSummary = response.data?.statusSummary || {};
 
@@ -64,34 +41,8 @@ const MyTasks = () => {
     }
   };
 
-  const handleClick = (taskId) => {
-    navigate(`/user/task-details/${taskId}`);
-  };
-
-  // download task report
-  const handleDownloadReport = async () => {
-    try {
-      const response = await axiosInstance.get(
-        API_PATHS.REPORTS.EXPORT_TASKS,
-        { responseType: "blob" }
-      );
-
-      const url = window.URL.createObjectURL(
-        new Blob([response.data])
-      );
-      const link = document.createElement("a");
-      link.href = url;
-      link.setAttribute("download", "task_details.xlsx");
-      document.body.appendChild(link);
-      link.click();
-      link.parentNode.removeChild(link);
-      window.URL.revokeObjectURL(url);
-    } catch (error) {
-      console.error("Error downloading task report:", error);
-      toast.error(
-        "Failed to download task report. Please try again."
-      );
-    }
+  const handleClick = (id) => {
+    navigate(`/user/task-details/${id}`);
   };
 
   useEffect(() => {
@@ -106,31 +57,20 @@ const MyTasks = () => {
           <h2 className="text-2xl md:text-2xl font-medium text-white/90">
             My Tasks
           </h2>
-
-          <button
-            className={styles.downloadBtn}
-            onClick={handleDownloadReport}
-          >
-            <LuFileSpreadsheet className="text-lg" />
-            Download Report
-          </button>
         </div>
 
         {tabs?.[0]?.count > 0 && (
-          <div className="flex items-center gap-3 mt-4 justify-between">
-            <TaskStatusTabs
-              tabs={tabs}
-              activeTab={filterStatus}
-              setActiveTab={setFilterStatus}
-            />
-            
-          </div>
+          <TaskStatusTabs
+            tabs={tabs}
+            activeTab={filterStatus}
+            setActiveTab={setFilterStatus}
+          />
         )}
 
         <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mt-4">
           {allTasks?.map((item) => (
             <TaskCard
-              key={item._id}
+              key={item.id}
               title={item.title}
               description={item.description}
               priority={item.priority}
@@ -138,13 +78,11 @@ const MyTasks = () => {
               progress={item.progress}
               createdAt={item.createdAt}
               dueDate={item.dueDate}
-              assignedTo={item.assignedTo?.map(
-                (user) => user.profileImageUrl
-              )}
+              assignedTo={item.assignedTo?.map((user) => user.profileImageUrl)}
               attachmentCount={item.attachments?.length || 0}
               completedTodoCount={item.completedTodoCount || 0}
               todoCheckList={item.todoCheckList || []}
-              onClick={() => handleClick(item._id)}
+              onClick={() => handleClick(item.id)}
             />
           ))}
         </div>
