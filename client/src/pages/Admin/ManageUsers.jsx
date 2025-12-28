@@ -78,7 +78,8 @@ const handleDownloadReport = async () => {
 
   return (
     <DashboardLayout activeMenu="Team Members">
-      <div className="mt-5 mb-10 mr-8">
+      <div className="mt-5 mb-5 mx-4 md:mx-5 lg:mr-8
+">
         <div className="flex md:flex-row md:items-center justify-between">
           <h2 className="text-[24px] md:text-[24px] font-medium text-white/95">
             Team Members

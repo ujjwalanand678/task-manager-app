@@ -52,7 +52,7 @@ const MyTasks = () => {
 
   return (
     <DashboardLayout activeMenu="My Tasks">
-      <div className="my-5 me-6">
+      <div className="mt-5 mb-5 mx-4 md:mx-5 lg:mr-8">
         <div className="flex flex-col md:flex-row md:items-center justify-between gap-3">
           <h2 className="text-2xl md:text-2xl font-medium text-white/90">
             My Tasks

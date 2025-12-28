@@ -7,8 +7,9 @@ const styles = {
     h-full
     flex flex-col
     backdrop-blur-2xl
+    border border-white/20
     backdrop-saturate-150
-    bg-white/10
+    bg-white/5
   `,
 
   desktopGlass: `
@@ -22,8 +23,9 @@ const styles = {
 
   mobileGlass: `
     flex lg:hidden
-    w-full
-    max-w-xs
+    
+    w-[300px]
+   
     border-r border-white/20
     rounded-3xl
   `,

@@ -58,7 +58,6 @@ const Dashboard = () => {
         prepareChartData(response.data?.charts || null);
       }
       console.log(response.data.charts.taskDistribution);
-
     } catch (error) {
       console.error("Error fetching users:", error);
     }
@@ -73,7 +72,21 @@ const Dashboard = () => {
 
   return (
     <DashboardLayout activeMenu="Dashboard">
-      <div className="bg-white/5 p-8 backdrop-blur-md border border-white/20 rounded-lg hover:shadow-[0_0_25px_rgba(255,255,255,0.35)] transition-all  mb-6 mt-5 mr-5 ">
+      <div
+        className="bg-white/5
+p-6 md:p-8
+backdrop-blur-md
+border border-white/20
+rounded-xl md:rounded-lg
+hover:shadow-[0_0_25px_rgba(255,255,255,0.35)]
+transition-all
+
+mx-4
+mt-4 mb-6
+md:mx-0 md:mt-5 md:mb-6 md:mr-5
+lg:mt-5 lg:mb-6 lg:mr-5
+ "
+      >
         <div>
           <div className="col-span-3">
             <h2 className="text-2xl md:text-2xl text-white/90">
@@ -124,7 +137,16 @@ const Dashboard = () => {
         <div>
           <div
             className="
-           bg-white/5 backdrop-blur-md border border-white/20 py-8 px-6 rounded-2xl hover:shadow-[0_0_25px_rgba(255,255,255,0.35)] transition-all  "
+          bg-white/5
+backdrop-blur-md
+border border-white/20
+
+py-6 px-4 mx-4 md:mx-0 md:py-8 md:px-6
+rounded-xl md:rounded-2xl
+
+hover:shadow-[0_0_25px_rgba(255,255,255,0.35)]
+transition-all
+ "
           >
             <div className="flex items-center justify-between">
               <h5 className="font-medium text-white/90">Task Distribution</h5>
@@ -136,7 +158,18 @@ const Dashboard = () => {
         <div>
           <div
             className="hover:shadow-[0_0_25px_rgba(255,255,255,0.35)]
-             bg-white/5 backdrop-blur-md border border-white/20 p-8 rounded-2xl mr-5 transition-all "
+bg-white/5 backdrop-blur-md
+border border-white/20
+
+p-6 md:p-8
+rounded-xl md:rounded-2xl
+
+mx-4 mt-4 mb-6
+md:mx-0 md:mt-0 md:mb-0
+lg:mr-5
+
+transition-all
+ "
           >
             <div className="flex items-center justify-between">
               <h5 className="font-medium text-white/90">
@@ -149,7 +182,7 @@ const Dashboard = () => {
         </div>
 
         <div className="md:col-span-2 ">
-          <div className="bg-white/5 p-4 rounded-lg  mr-5 backdrop-blur-md border border-white/20 hover:shadow-[0_0_25px_rgba(255,255,255,0.35)] transition-all ">
+          <div className="bg-white/5 p-4 rounded-lg  lg:mr-5 backdrop-blur-md border border-white/20 hover:shadow-[0_0_25px_rgba(255,255,255,0.35)] transition-all mx-4 md:mx-0 ">
             <div className="flex items-center justify-between">
               <h5 className="text-lg font-semibold text-white/90">
                 Recent Tasks

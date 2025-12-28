@@ -52,7 +52,6 @@ const UserDashboard = () => {
         setDashboardData(response.data);
         prepareChartData(response.data?.charts || null);
       }
-    
     } catch (error) {
       console.error("Error fetching users:", error);
     }
@@ -64,14 +63,28 @@ const UserDashboard = () => {
 
   useEffect(() => {
     getDashboardData();
-     return () => {};
+    return () => {};
   }, []);
 
   return (
     <DashboardLayout activeMenu="Dashboard">
       {/* Header Card */}
-      <div className="bg-white/5 p-8 backdrop-blur-md border border-white/20 transition-all rounded-lg shadow-sm mb-6 mt-5 mr-5">
-        <div className="col-span-3">
+      <div
+        className="bg-white/5
+p-6 md:p-8
+backdrop-blur-md
+border border-white/20
+rounded-xl md:rounded-lg
+hover:shadow-[0_0_25px_rgba(255,255,255,0.35)]
+transition-all
+
+mx-4
+mt-4 mb-6
+md:mx-0 md:mt-5 md:mb-6 md:mr-5
+lg:mt-5 lg:mb-6 lg:mr-5
+"
+      >
+        <div className="col-span-3 w-full">
           <h2 className="text-xl md:text-2xl text-white/90">
             Good Morning! {user?.name}
           </h2>
@@ -116,7 +129,19 @@ const UserDashboard = () => {
       {/* Charts */}
       <div className="grid grid-cols-1 md:grid-cols-2 gap-6 my-4 md:my-6">
         <div>
-          <div className="hover:shadow-[0_0_25px_rgba(255,255,255,0.35)] bg-white/5 backdrop-blur-md border border-white/20 py-8 px-6 rounded-2xl shadow-xl transition-all">
+          <div
+            className=" 
+           bg-white/5
+backdrop-blur-md
+border border-white/20
+
+py-6 px-4 mx-4 md:mx-0 md:py-8 md:px-6
+rounded-xl md:rounded-2xl
+
+hover:shadow-[0_0_25px_rgba(255,255,255,0.35)]
+transition-all
+"
+          >
             <div className="flex items-center justify-between">
               <h5 className="font-medium text-white/90">Task Distribution</h5>
             </div>
@@ -126,7 +151,20 @@ const UserDashboard = () => {
         </div>
 
         <div>
-          <div className="hover:shadow-[0_0_25px_rgba(255,255,255,0.35)] bg-white/5 backdrop-blur-md border border-white/20 p-8 rounded-2xl mr-5 transition-all">
+          <div
+            className="hover:shadow-[0_0_25px_rgba(255,255,255,0.35)]
+bg-white/5 backdrop-blur-md
+border border-white/20
+
+p-6 md:p-8
+rounded-xl md:rounded-2xl
+
+mx-4 mt-4 mb-6
+md:mx-0 md:mt-0 md:mb-0
+lg:mr-5
+
+transition-all"
+          >
             <div className="flex items-center justify-between">
               <h5 className="font-medium text-white/90">
                 Task Priority Levels
@@ -139,14 +177,15 @@ const UserDashboard = () => {
 
         {/* Recent Tasks */}
         <div className="md:col-span-2">
-          <div className="bg-white/5 p-4 rounded-lg mr-5 backdrop-blur-md border border-white/20">
+          <div className="bg-white/5 p-4 rounded-lg  lg:mr-5 backdrop-blur-md border border-white/20 hover:shadow-[0_0_25px_rgba(255,255,255,0.35)] transition-all mx-4 md:mx-0">
             <div className="flex items-center justify-between">
               <h5 className="text-lg font-semibold text-white/90">
                 Recent Tasks
               </h5>
 
               <button
-                className="text-white/90 flex items-center gap-2 font-semibold bg-white/10 rounded-md px-3 py-1 cursor-pointer"
+                className="text-white/90 flex items-center gap-2 font-semibold bg-white/10 rounded-md 
+                px-3 py-1 cursor-pointer"
                 onClick={onSeeMore}
               >
                 See All <LuArrowRight />

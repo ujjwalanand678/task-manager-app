@@ -52,7 +52,7 @@ const Navbar = ({ activeMenu }) => {
               z-60
               backdrop-blur-2xl
               backdrop-saturate-150
-
+w-[300px]
               border border-white/20
               rounded-3xl
 

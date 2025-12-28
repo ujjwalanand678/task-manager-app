@@ -95,7 +95,7 @@ const ManageTasks = () => {
 
   return (
     <DashboardLayout activeMenu="Manage Tasks">
-      <div className="my-5  mr-8">
+      <div className="mt-5 mb-5 mx-4 md:mx-5 lg:mr-8">
         <div className="flex flex-col md:flex-row md:items-center justify-between gap-3">
           <h2 className="text-2xl md:text-2xl font-medium text-white/90">
             My Tasks
