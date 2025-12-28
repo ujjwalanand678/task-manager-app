@@ -29,7 +29,7 @@ const TaskListTable = ({ tableData }) => {
   };
 
   return (
-    <div className="overflow-x-auto p-0 rounded-lg mt-3">
+    <div className="overflow-x-auto p-0 rounded-lg mt-3 ">
       <table className="min-w-full">
         <thead>
           <tr className="text-left">

@@ -3,23 +3,33 @@ import { useNavigate } from "react-router-dom";
 import { SIDE_MENU_DATA, SIDE_MENU_USER_DATA } from "../../utils/data";
 import { UserContext } from "../../context/UserContext";
 const styles = {
-  sideMenuGlassCard: `
-  relative
-  h-full
-  w-64
+  base: `
+    h-full
+    flex flex-col
+    backdrop-blur-2xl
+    backdrop-saturate-150
+    bg-white/10
+  `,
 
-  backdrop-blur-lg
-  bg-white/5
+  desktopGlass: `
+    hidden lg:flex
+    w-64
+    border-r border-white/20
+    rounded-l-3xl
+    rounded-r-none
+    sticky top-0
+  `,
 
-  border-r border-white/20
-
-  rounded-l-3xl
-  rounded-r-none
-
-  sticky top-0
-`,
+  mobileGlass: `
+    flex lg:hidden
+    w-full
+    max-w-xs
+    border-r border-white/20
+    rounded-3xl
+  `,
 };
-const SideMenu = ({ activeMenu }) => {
+
+const SideMenu = ({ activeMenu, isMobile = false }) => {
   const { user, clearUser } = useContext(UserContext);
   const [sideMenuData, setSideMenuData] = useState([]);
 
@@ -49,25 +59,21 @@ const SideMenu = ({ activeMenu }) => {
   }, [user]);
 
   return (
-    <div className={styles.sideMenuGlassCard}>
+    <div
+  className={`
+    ${styles.base}
+    ${isMobile ? styles.mobileGlass : styles.desktopGlass}
+  `}
+>
+
       <div className="flex flex-col items-center justify-center mb-7 pt-5">
-      <div className="relative">
-  <img
-    src={user?.profileImageUrl || undefined}
-    alt="Profile Image"
-    className="
-      w-20 h-20
-      rounded-full
-      border border-white/20
-      bg-white/20
-      object-cover
-
-      flex items-center justify-center
-      text-white text-xs font-medium text-center
-    "
-  />
-</div>
-
+        <div className="relative  justify-between  ">
+          <img
+            src={user?.profileImageUrl || ""}
+            alt="Profile Image"
+            className="w-20 h-20 bg-white/20 text-white text-center items-center rounded-full border border-white/20 object-cover"
+          />
+        </div>
 
         {user?.role === "admin" && (
           <div className="text-[14px] font-medium text-white bg-primary px-3 py-0.5 rounded mt-1">

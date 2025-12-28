@@ -8,7 +8,7 @@ import toast from "react-hot-toast";
 
 const styles = {
   downloadBtn: `
- mr-8
+
 
     cursor-pointer
     flex items-center gap-2
@@ -78,9 +78,9 @@ const handleDownloadReport = async () => {
 
   return (
     <DashboardLayout activeMenu="Team Members">
-      <div className="mt-5 mb-10">
+      <div className="mt-5 mb-10 mr-8">
         <div className="flex md:flex-row md:items-center justify-between">
-          <h2 className="text-xl md:text-xl font-medium text-white/90">
+          <h2 className="text-[24px] md:text-[24px] font-medium text-white/95">
             Team Members
           </h2>
 
@@ -93,7 +93,7 @@ const handleDownloadReport = async () => {
           </button>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mt-4">
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mt-4 ">
           {allUsers?.map((user) => (
             <UserCard key={user._id} userInfo={user} />
           ))}

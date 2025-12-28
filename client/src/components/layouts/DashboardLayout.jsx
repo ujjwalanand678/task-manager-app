@@ -14,14 +14,15 @@ backdrop-saturate-150
 `;
 
 const styles = {
-  root: `
+root: `
   relative min-h-screen w-full 
-  overflow-hidden
-z-0
-p-5
- bg-[#14171E]
-
-`,
+- overflow-hidden
++ overflow-x-hidden
+  z-0
+  p-5
+  bg-[#14171E]
+`
+,
   // bg-[radial-gradient(circle_at_top,#b4faf0_0%,#4edded_45%,#52d1b6_100%)]
   centerWrapper: `
     relative z-10
@@ -108,7 +109,7 @@ const DashboardLayout = ({ children, activeMenu }) => {
               </div>
 
               {/* Main Content */}
-              <div className="grow overflow-y-auto ps-6">{children}</div>
+              <div className="grow overflow-y-auto lg:ps-6">{children}</div>
             </div>
           </div>
         </div>

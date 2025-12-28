@@ -73,10 +73,10 @@ const Dashboard = () => {
 
   return (
     <DashboardLayout activeMenu="Dashboard">
-      <div className="bg-white/5 p-8 backdrop-blur-md border border-white/20 transition-all rounded-lg shadow-sm mb-6 mt-5 mr-5 ">
+      <div className="bg-white/5 p-8 backdrop-blur-md border border-white/20 rounded-lg hover:shadow-[0_0_25px_rgba(255,255,255,0.35)] transition-all  mb-6 mt-5 mr-5 ">
         <div>
           <div className="col-span-3">
-            <h2 className="text-xl md:text-2xl text-white/90">
+            <h2 className="text-2xl md:text-2xl text-white/90">
               Good Morning! {user?.name}
             </h2>
 
@@ -123,8 +123,8 @@ const Dashboard = () => {
       <div className=" grid grid-cols-1 md:grid-cols-2 gap-6 my-4 md:my-6">
         <div>
           <div
-            className="hover:shadow-[0_0_25px_rgba(255,255,255,0.35)]
-           bg-white/5 backdrop-blur-md border border-white/20 py-8 px-6 rounded-2xl shadow-xl transition-all  "
+            className="
+           bg-white/5 backdrop-blur-md border border-white/20 py-8 px-6 rounded-2xl hover:shadow-[0_0_25px_rgba(255,255,255,0.35)] transition-all  "
           >
             <div className="flex items-center justify-between">
               <h5 className="font-medium text-white/90">Task Distribution</h5>
@@ -149,14 +149,14 @@ const Dashboard = () => {
         </div>
 
         <div className="md:col-span-2 ">
-          <div className="bg-white/5 p-4 rounded-lg  mr-5 backdrop-blur-md border border-white/20">
+          <div className="bg-white/5 p-4 rounded-lg  mr-5 backdrop-blur-md border border-white/20 hover:shadow-[0_0_25px_rgba(255,255,255,0.35)] transition-all ">
             <div className="flex items-center justify-between">
               <h5 className="text-lg font-semibold text-white/90">
                 Recent Tasks
               </h5>
 
               <button
-                className="text-white/90 flex items-center gap-2 font-semibold bg-white/10 rounded-md px-3 py-1 cursor-pointer"
+                className="text-white/95 border border-white/30 flex items-center gap-2 font-semibold bg-white/10 rounded-md px-3 py-1 cursor-pointer hover:shadow-[0_0_25px_rgba(255,255,255,0.35)] transition-all "
                 onClick={onSeeMore}
               >
                 See All <LuArrowRight />

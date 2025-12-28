@@ -10,6 +10,7 @@ const Navbar = ({ activeMenu }) => {
       {/* Navbar */}
       <div
         className="
+        
           relative z-50
           mr-4 ml-4 mb-2
           flex items-center justify-between
@@ -22,14 +23,11 @@ const Navbar = ({ activeMenu }) => {
       >
         {/* Mobile menu toggle */}
         <button
+         aria-label={openSideMenu ? "Close menu" : "Open menu"}
           className="block lg:hidden text-white/95 hover:text-white transition"
           onClick={() => setOpenSideMenu(!openSideMenu)}
         >
-          {openSideMenu ? (
-            <HiOutlineX className="text-2xl" />
-          ) : (
-            <HiOutlineMenu className="text-2xl" />
-          )}
+       {openSideMenu ? <HiOutlineX className="text-2xl" /> : <HiOutlineMenu className="text-2xl" />}
         </button>
 
         {/* Title */}
@@ -43,27 +41,27 @@ const Navbar = ({ activeMenu }) => {
         <>
           {/* Overlay */}
           <div
-            className="fixed inset-0 bg-black/80 z-[9998]"
+            className="fixed inset-0 bg-black/50 z-40 "
             onClick={() => setOpenSideMenu(false)}
           />
 
           {/* Mobile Side Menu */}
           <div
             className="
-              fixed top-[72px] left-4
-              z-[9999]
-
-              bg-white/15
+              fixed top-[74px] left-9
+              z-60
               backdrop-blur-2xl
               backdrop-saturate-150
 
               border border-white/20
-              rounded-2xl
+              rounded-3xl
 
               shadow-[0_30px_80px_rgba(0,0,0,0.45)]
             "
+            role="dialog"
+            aria-modal="true"
           >
-            <SideMenu activeMenu={activeMenu} />
+            <SideMenu activeMenu={activeMenu} isMobile onClose={() => setOpenSideMenu(false)} />
           </div>
         </>
       )}

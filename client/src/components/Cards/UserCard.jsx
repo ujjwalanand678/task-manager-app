@@ -8,9 +8,10 @@ const styles = {
   bg-white/5
   w-full 
   rounded-3xl
-  p-6
+  p-4
+  mt-2
   border border-white/10
-  shadow-[0_30px_120px_rgba(0,0,0,0.45)]
+  hover:shadow-[0_0_25px_rgba(255,255,255,0.35)] transition-all 
 `,
 
 };
@@ -22,7 +23,7 @@ const UserCard = ({ userInfo }) => {
           <img
             src={userInfo?.profileImageUrl}
             alt="Avatar"
-            className="w-12 h-12 rounded-full border-2 border-white"
+            className="w-12 h-12 rounded-full bg-white/10 border border-white/20 text-white text-center text-sm"
           />
 
           <div>
@@ -61,19 +62,19 @@ const StatCard = ({ label, count, status }) => {
   const getStatusTagColor = () => {
     switch (status) {
       case "In Progress":
-        return "text-cyan-500 bg-gray-50";
+        return "text-cyan-500 bg-cyan-50";
 
       case "Completed":
-        return "text-indigo-500 bg-gray-50";
+        return "text-indigo-500 bg-indigo-50";
 
       default:
-        return "text-violet-500 bg-gray-50";
+        return "text-violet-500 bg-violet-50";
     }
   };
 
   return (
     <div
-      className={`flex-1 text-[12px] font-medium ${getStatusTagColor()} px-2 py-0.5 rounded`}
+      className={`flex-1 text-[12px] font-medium ${getStatusTagColor()} px-1.5 py-0.5 rounded`}
     >
       <span className="text-[12px] font-semibold">{count}</span>
       <br />

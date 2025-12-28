@@ -43,7 +43,7 @@ const TaskCard = ({
   return (
     <div
       onClick={onClick}
-      className="bg-white/5 rounded-xl border border-gray-200 p-4 cursor-pointer hover:shadow-md transition"
+      className="bg-white/5 rounded-xl border border-gray-200 p-4 cursor-pointer hover:shadow-[0_0_25px_rgba(255,255,255,0.35)] transition-all "
     >
       {/* Status & Priority */}
       <div className="flex items-center gap-2 mb-3">

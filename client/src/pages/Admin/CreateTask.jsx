@@ -64,7 +64,6 @@ const CreateTask = () => {
             { text: item.text ?? "", completed: !!item.completed }
       );
 
-      
       const payload = {
         ...taskData,
         dueDate: new Date(taskData.dueDate).toISOString(),
@@ -214,15 +213,17 @@ const CreateTask = () => {
     <DashboardLayout activeMenu="Create Task">
       <div
         className="
-        
-    bg-white/5
-    p-8
-    backdrop-blur-xl
-    border border-white/20
-    transition-all
-    rounded-r-3xl
-    rounded-l-none
-    
+             bg-white/5
+  p-8
+  backdrop-blur-xl
+  border border-white/20
+  transition-all
+
+  rounded-3xl         
+  
+  lg:rounded-r-3xl    /* desktop: keep your design */
+  lg:rounded-l-none
+
    
   "
       >

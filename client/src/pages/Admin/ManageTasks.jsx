@@ -10,7 +10,7 @@ import toast from "react-hot-toast";
 
 const styles = {
   downloadBtn: `
- mr-8
+
     md:hidden
     cursor-pointer
     flex items-center justify-center gap-2
@@ -95,7 +95,7 @@ const ManageTasks = () => {
 
   return (
     <DashboardLayout activeMenu="Manage Tasks">
-      <div className="my-5">
+      <div className="my-5  mr-8">
         <div className="flex flex-col md:flex-row md:items-center justify-between gap-3">
           <h2 className="text-2xl md:text-2xl font-medium text-white/90">
             My Tasks
@@ -108,7 +108,7 @@ const ManageTasks = () => {
         </div>
 
         {tabs?.[0]?.count > 0 && (
-          <div className="flex items-center gap-3 mt-4 justify-between">
+          <div className="flex items-center gap-3 mt-4 justify-between ">
             <TaskStatusTabs
               tabs={tabs}
               activeTab={filterStatus}
@@ -117,7 +117,7 @@ const ManageTasks = () => {
 
             <button
               className="
-  mr-8
+
   hidden md:flex
   cursor-pointer
   items-center gap-2
