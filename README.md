@@ -17,10 +17,10 @@ It is designed with scalability, security, and usability as core principles, ref
 - Modern glassmorphism UI built with Tailwind CSS
 
 ## Tech Stack
-Frontend: React, Tailwind CSS  
-Backend: Node.js, Express.js  
-Database: MongoDB  
-Cloud & Utilities: Cloudinary (image storage), ExcelJS (report export) 
+- Frontend: React, Tailwind CSS  
+- Backend: Node.js, Express.js  
+- Database: MongoDB  
+- Cloud & Utilities: Cloudinary (image storage), ExcelJS (report export) 
 
 ## Author
 Ujjwal Anand
