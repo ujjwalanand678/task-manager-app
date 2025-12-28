@@ -25,7 +25,7 @@ const __dirname = dirname(__filename);
 //middleware to handle cors policy
 const corsPolicy = {
   origin: [process.env.CLIENT_URI,  "http://localhost:8000",
-    "http://localhost:5173"],
+    "https://task-manager-app-red-omega.vercel.app" ,  "http://localhost:5173"],
   credentials: true,
   methods: ["GET", "POST", "PUT", "DELETE"],
   allowedHeaders: ["Content-Type", "Authorization"],
