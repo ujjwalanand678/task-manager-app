@@ -7,6 +7,23 @@ The platform features role-based access, interactive dashboards, task analytics,
 This application helps teams and individuals efficiently manage tasks, monitor progress, and analyze workload through intuitive dashboards.
 It is designed with scalability, security, and usability as core principles, reflecting real business workflows rather than demo-only functionality.
 
+## Screenshots
+
+### Login
+![Login Page](./screenshots/login.png)
+
+### SignUp
+![SignUp Page](./screenshots/signUp.png)
+
+### Dashboard
+![Dashboard](./screenshots/dashboard.png)
+
+### Task Management
+![Tasks](./screenshots/myTask.png)
+
+### Create Task
+![createTask](./screenshots/createTask.png)
+
 ## Features
 - JWT-based authentication & role-based authorization
 - Task creation, assignment, and tracking (Admin & Member)
